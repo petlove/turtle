@@ -1,7 +1,7 @@
 require 'bundler/setup'
 require 'config/simple_cov_config'
 SimpleCovConfig.configure
-
+require 'pry'
 require 'turtle'
 
 RSpec.configure do |config|

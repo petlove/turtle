@@ -4,8 +4,8 @@ require 'turtle/logger'
 
 module Turtle
   class << self
-    def queues_priority(options = nil)
-      options ? Queue.priority_filtered(options) : Queue.priority
+    def shoryuken_queues_priorities(options = nil)
+      Queue.shoryuken_priorities(options)
     end
   end
 end

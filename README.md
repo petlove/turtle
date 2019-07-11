@@ -1,38 +1,54 @@
-# Turtle
+# [Turtle](https://github.com/petlove/turtle)
+[![Build Status](https://travis-ci.org/petlove/turtle.svg?branch=master)](https://travis-ci.org/petlove/turtle)
+[![Maintainability](https://api.codeclimate.com/v1/badges/66a7166187c323835430/maintainability)](https://codeclimate.com/github/petlove/turtle/maintainability)
+[![Maintainability](https://api.codeclimate.com/v1/badges/66a7166187c323835430/maintainability)](https://codeclimate.com/github/petlove/turtle/maintainability)
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/turtle`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+A helper to use workers and topics with Ruby on Rails
 
 ## Installation
 
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'turtle'
+gem 'turtle', github: 'petlove/turtle'
 ```
-
-And then execute:
-
-    $ bundle
-
-Or install it yourself as:
-
-    $ gem install turtle
 
 ## Usage
 
-TODO: Write usage instructions here
+### Queues with priority for shoryuken
+```ruby
+Turtle.shoryuken_queues_priorities
+# => [["macaw_linquetab_enqueue_triggered_send_credit_earned", 2],
+#  ["macaw_linquetab_enqueue_triggered_send_question_answer", 2],
+#  ["macaw_linquetab_enqueue_triggered_send_product_back_in_stock", 2],
+#  ["macaw_linquetab_perform_order_events", 3],
+#  ["macaw_linquetab_perform_order_payment_pending_events", 3],
+#  ["macaw_linquetab_perform_shipment_events", 3],
+#  ["macaw_linquetab_update_data_extension_reviews", 1],
+#  ["macaw_linquetab_update_data_extension_products", 1],
+#  ["macaw_linquetab_update_data_extension_animal_pets", 1],
+#  ["macaw_linquetab_update_data_extension_orders_carts", 1],
+#  ["macaw_linquetab_update_data_extension_customers", 1],
+#  ["macaw_linquetab_update_data_extension_customer_coupons", 1],
+#  ["macaw_linquetab_update_list_subscribers", 1],
+#  ["macaw_linquetab_perform_subscription_events", 3],
+#  ["macaw_linquetab_update_data_extension_subscriptions", 1]]
 
-## Development
-
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
-
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+# Filter by queue metada fields
+Turtle.shoryuken_queues_priorities(priority: 3)
+# => [["macaw_linquetab_perform_order_events", 3],
+#  ["macaw_linquetab_perform_order_payment_pending_events", 3],
+#  ["macaw_linquetab_perform_shipment_events", 3],
+#  ["macaw_linquetab_perform_subscription_events", 3]]
+```
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/turtle.
+1. Fork it
+2. Create your feature branch (`git checkout -b my-new-feature`)
+3. Commit your changes (`git commit -am 'Add some feature'`)
+4. Push to the branch (`git push origin my-new-feature`)
+5. Create new [Pull Request](../../pull/new/master)
 
 ## License
 
