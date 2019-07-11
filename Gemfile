@@ -2,6 +2,8 @@ source 'https://rubygems.org'
 
 gem 'aws-sns-configurator', github: 'petlove/aws-sns-configurator'
 gem 'aws-sqs-configurator', github: 'petlove/aws-sqs-configurator'
+gem 'delayed_job_active_record'
+gem 'rails', '>= 4.1.9'
 gem 'ruby-utils', github: 'petlove/ruby-utils'
 
 group :development, :test do
