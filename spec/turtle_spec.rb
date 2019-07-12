@@ -37,4 +37,14 @@ RSpec.describe Turtle, type: :module do
       expect(described_class::Queue).to receive(:enqueue!).once
     end
   end
+
+  describe '#publish!' do
+    subject { described_class.publish!(Object, { hello: :world }, delayed: true) }
+
+    after { subject }
+
+    it 'should call through Topic' do
+      expect(described_class::Topic).to receive(:publish!).once
+    end
+  end
 end

@@ -1,7 +1,7 @@
 # [Turtle](https://github.com/petlove/turtle)
 [![Build Status](https://travis-ci.org/petlove/turtle.svg?branch=master)](https://travis-ci.org/petlove/turtle)
 [![Maintainability](https://api.codeclimate.com/v1/badges/66a7166187c323835430/maintainability)](https://codeclimate.com/github/petlove/turtle/maintainability)
-[![Maintainability](https://api.codeclimate.com/v1/badges/66a7166187c323835430/maintainability)](https://codeclimate.com/github/petlove/turtle/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/66a7166187c323835430/test_coverage)](https://codeclimate.com/github/petlove/turtle/test_coverage)
 
 A helper to use workers and topics with Ruby on Rails
 
@@ -70,7 +70,7 @@ See more about DelayedJob [here](https://github.com/collectiveidea/delayed_job).
 The worker should include `Shoryuken::Worker` and have the option `:queue` defined.
 
 ```ruby
-# Turtle.enqueue!(worker, data, options)
+# Turtle.enqueue!(worker, data, options = {})
 Turtle.enqueue!(SomeWorker, { hello: 'world' })
 ```
 
@@ -93,6 +93,29 @@ Turtle.enqueue!(SomeWorker, { hello: 'world' })
 }
 ```
 
+### Publish in a topic
+```ruby
+# Turtle.publish!(name, data, options = {})
+Turtle.publish!('product_event_created', { hello: 'world' })
+```
+
+#### Options
+| Key | Default | What's it? |
+|-----|---------|------------|
+| `delay` | `false` | Enqueue the data through DelayedJob process. Pass `true` to use it. |
+| `model` | `nil` | Envolope the data with the field `model`. It should be like `Spree::Order`, `Subscription` or any model name|
+| `event` | `nil` | Envolope the data with the field `event`. It should be like `:created`, `:completed` or any event name|
+
+**Important:** If the fields `model` or `event` exists, the data will be enveloped like this code:
+```ruby
+{
+  event: 'order_created',
+  model: 'spree_order',
+  data: {
+    hello: 'world'
+  }
+}
+```
 
 ## Contributing
 

@@ -16,5 +16,9 @@ module Turtle
     def enqueue!(worker, data, options = {})
       Queue.enqueue!(worker, data, options)
     end
+
+    def publish!(topic, data, options = {})
+      Topic.publish!(topic, data, options)
+    end
   end
 end
