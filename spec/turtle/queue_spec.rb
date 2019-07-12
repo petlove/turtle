@@ -24,4 +24,16 @@ RSpec.describe Turtle::Queue, type: :model do
       end
     end
   end
+
+  describe '#delayed_job_queue_attributes' do
+    subject { described_class.delayed_job_queue_attributes }
+    before { stub_const('AWS::SQS::Configurator::Reader::MAIN_FILE', './spec/fixtures/configs/queues.yml') }
+
+    it 'should return priority two queues' do
+      is_expected.to eq(
+        queue_system_name_production_product_adjuster_alert: { priority: 2 },
+        queue_system_name_production_product_updater_queue: { priority: 1 }
+      )
+    end
+  end
 end

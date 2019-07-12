@@ -34,13 +34,38 @@ Turtle.shoryuken_queues_priorities
 #  ["macaw_linquetab_perform_subscription_events", 3],
 #  ["macaw_linquetab_update_data_extension_subscriptions", 1]]
 
-# Filter by queue metada fields
+# Filter by queue metadata fields
 Turtle.shoryuken_queues_priorities(priority: 3)
 # => [["macaw_linquetab_perform_order_events", 3],
 #  ["macaw_linquetab_perform_order_payment_pending_events", 3],
 #  ["macaw_linquetab_perform_shipment_events", 3],
 #  ["macaw_linquetab_perform_subscription_events", 3]]
 ```
+
+### Setting DelayedJob
+You should follow this steps:
+1. Add `gem 'delayed_job_active_record'` in your Gemfile
+2. Run `rails generate delayed_job:active_record`
+3. Run `rails db:migrate`
+4. Set in the file _config/application.rb_ this code:
+```ruby
+config.active_job.queue_adapter = :delayed_job
+```
+5. Set the file _config/initializers/delayed_job.rb_ with this code:
+```ruby
+Delayed::Worker.queue_attributes = Turtle.delayed_job_queue_attributes
+```
+6. Set the supervisor to run DelayedJob with this code:
+```bash
+[program:delayed_job]
+command=bundle exec rake jobs:work
+user = root
+autostart=true
+autorestart=true
+redirect_stderr=false
+```
+
+See more about DelayedJob [here](https://github.com/collectiveidea/delayed_job).
 
 ## Contributing
 

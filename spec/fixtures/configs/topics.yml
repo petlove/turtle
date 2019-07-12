@@ -1,0 +1,15 @@
+default:
+  general:
+    region: 'us-east-1'
+    prefix: 'system_name'
+    suffix: 'topic'
+    environment: 'production'
+topics:
+  - name: 'customer'
+    region: 'sa-east-1'
+    metadata:
+      priority: 1
+  - name: 'address'
+    suffix: 'alert'
+    metadata:
+      priority: 1
