@@ -42,6 +42,30 @@ Turtle.shoryuken_queues_priorities(priority: 3)
 #  ["macaw_linquetab_perform_subscription_events", 3]]
 ```
 
+### Name for
+```ruby
+# Turtle.name_for(type, name, options)
+Turtle.name_for(:queue, 'order_sync')
+# => beagle_production_order_sync
+Turtle.name_for(:topic, 'order_created')
+# => beagle_production_order_created
+```
+
+#### Options
+| Key | Default |
+|-----|---------|
+| `region` | `ENV['AWS_REGION']` |
+| `prefix` | `ENV['APP_NAME']` |
+| `environment` | `ENV['APP_ENV']` |
+| `suffix` | `nil` |
+
+
+### Default retry intervals
+```ruby
+Turtle.retry_intervals
+# => [5.minutes, 15.minutes, 30.minutes, 1.hour, 3.hours, 12.hours]
+```
+
 ### Setting DelayedJob
 You should follow this steps:
 1. Add `gem 'delayed_job_active_record'` in your Gemfile

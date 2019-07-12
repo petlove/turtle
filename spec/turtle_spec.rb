@@ -47,4 +47,32 @@ RSpec.describe Turtle, type: :module do
       expect(described_class::Topic).to receive(:publish!).once
     end
   end
+
+  describe '#retry_intervals' do
+    subject { described_class.retry_intervals }
+
+    it 'should return the intervals' do
+      is_expected.to eq([5.minutes, 15.minutes, 30.minutes, 1.hour, 3.hours, 12.hours])
+    end
+  end
+
+  describe '#name_for' do
+    subject { described_class.name_for(type, 'linqueta', region: 'us-east-1', prefix: 'beagle', environment: 'dev') }
+
+    context 'with queue' do
+      let(:type) { :queue }
+
+      it 'should return queue name formatted' do
+        is_expected.to eq('beagle_dev_linqueta')
+      end
+    end
+
+    context 'with topic' do
+      let(:type) { :topic }
+
+      it 'should return topic name formatted' do
+        is_expected.to eq('beagle_dev_linqueta')
+      end
+    end
+  end
 end
