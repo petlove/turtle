@@ -64,8 +64,35 @@ autostart=true
 autorestart=true
 redirect_stderr=false
 ```
-
 See more about DelayedJob [here](https://github.com/collectiveidea/delayed_job).
+
+### Publish in a queue through Shoryuken
+The worker should include `Shoryuken::Worker` and have the option `:queue` defined.
+
+```ruby
+# Turtle.enqueue!(worker, data, options)
+Turtle.enqueue!(SomeWorker, { hello: 'world' })
+```
+
+#### Options
+| Key | Default | What's it? |
+|-----|---------|------------|
+| `delay` | `false` | Enqueue the data through DelayedJob process. Pass `true` to use it. |
+| `seconds` | `0` | Use AWS SQS delay. Pass an integer between 0 and 900. |
+| `model` | `nil` | Envolope the data with the field `model`. It should be like `Spree::Order`, `Subscription` or any model name|
+| `event` | `nil` | Envolope the data with the field `event`. It should be like `:created`, `:completed` or any event name|
+
+**Important:** If the fields `model` or `event` exists, the data will be enveloped like this code:
+```ruby
+{
+  event: 'order_created',
+  model: 'spree_order',
+  data: {
+    hello: 'world'
+  }
+}
+```
+
 
 ## Contributing
 

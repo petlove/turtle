@@ -23,7 +23,7 @@ module Turtle
       private
 
       def enqueued_log_message(worker, options, spent)
-        "Enqueued: #{worker} Delayed: #{delayed?(worker, options)} Perform in: #{seconds(options)} Spent: #{spent}"
+        "Enqueued: #{worker} Delay: #{delay?(worker, options)} Perform in: #{seconds(options)} Spent: #{spent}"
       end
 
       def publish!(worker, data, options)
@@ -35,9 +35,7 @@ module Turtle
       end
 
       def envelope(data, options)
-        return data unless options[:event] && options[:model]
-
-        { model: options[:model], event: options[:event], data: data }
+        options[:event] || options[:model] ? { model: options[:model], event: options[:event], data: data } : data
       end
 
       def seconds?(options)
@@ -49,11 +47,11 @@ module Turtle
       end
 
       def handled_worker(worker, options)
-        delayed?(worker, options) ? delayed_worker(worker) : worker
+        delay?(worker, options) ? delayed_worker(worker) : worker
       end
 
       def delayed_worker(worker)
-        worker.delay(queue: worker)
+        worker.delay(queue: delayed_job_queue_name(worker.shoryuken_options_hash['queue']))
       end
 
       def perform_in(worker, payload, seconds)
@@ -64,8 +62,8 @@ module Turtle
         worker.perform_async(payload)
       end
 
-      def delayed?(worker, options)
-        !(!options[:delayed] || !worker.respond_to?(:delay))
+      def delay?(worker, options)
+        !(!options[:delay] || !worker.respond_to?(:delay))
       end
 
       def list
@@ -74,7 +72,7 @@ module Turtle
 
       def delayed_job_queue_attributes_by_queues(queues)
         queues.each_with_object({}) do |queue, object|
-          object[delayed_job_queue_name(queue)] = delayed_job_attributes_by_queue(queue)
+          object[delayed_job_queue_name(queue.name_formatted).to_sym] = delayed_job_attributes_by_queue(queue)
         end
       end
 
@@ -82,8 +80,8 @@ module Turtle
         { priority: queue.metadata[:priority] || 1 }
       end
 
-      def delayed_job_queue_name(queue)
-        "#{DELAYED_JOB_QUEUE_PREFIX}_#{queue.name_formatted}".to_sym
+      def delayed_job_queue_name(name_formatted)
+        "#{DELAYED_JOB_QUEUE_PREFIX}_#{name_formatted}"
       end
 
       def shoryuken_priorities_by_queues(queues)

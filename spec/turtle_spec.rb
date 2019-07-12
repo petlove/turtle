@@ -27,4 +27,14 @@ RSpec.describe Turtle, type: :module do
       )
     end
   end
+
+  describe '#enqueue!' do
+    subject { described_class.enqueue!(Object, { hello: :world }, seconds: 10, delayed: true) }
+
+    after { subject }
+
+    it 'should call through Queue' do
+      expect(described_class::Queue).to receive(:enqueue!).once
+    end
+  end
 end
