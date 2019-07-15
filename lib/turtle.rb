@@ -2,7 +2,12 @@ require 'turtle/version'
 require 'turtle/queue'
 require 'turtle/topic'
 require 'turtle/logger'
-require 'rails'
+require 'turtle/event_notificator'
+require 'turtle/event_notificator/notification'
+require 'turtle/event_notificator/event'
+require 'turtle/event_notificator/state'
+require 'turtle/event_notificator/action'
+require 'honeybadger'
 
 module Turtle
   class << self
@@ -30,7 +35,7 @@ module Turtle
     end
 
     def retry_intervals
-      [5.minutes, 15.minutes, 30.minutes, 1.hour, 3.hours, 12.hours]
+      [300, 900, 1800, 3600, 10_800, 43_200]
     end
 
     private

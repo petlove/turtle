@@ -52,7 +52,7 @@ RSpec.describe Turtle, type: :module do
     subject { described_class.retry_intervals }
 
     it 'should return the intervals' do
-      is_expected.to eq([5.minutes, 15.minutes, 30.minutes, 1.hour, 3.hours, 12.hours])
+      is_expected.to eq([300, 900, 1800, 3600, 10_800, 43_200])
     end
   end
 
