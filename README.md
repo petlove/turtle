@@ -141,6 +141,63 @@ Turtle.publish!('product_event_created', { hello: 'world' })
 }
 ```
 
+### Using event notificator
+```ruby
+include Turtle::EventNotificator
+
+act_as_notification model: 'order',
+                    enveloped: true,
+                    serializer: OrderEventSerializer,
+                    states: %i(pending completed),
+                    state_column: :state,
+                    actions: %i(created updated destroyed),
+                    rescue_errors: false,
+                    notify_rescued_error: false,
+                    delayed: %i(created updated completed)
+```
+
+The topic name that will be publicated follows the structure:
+```ruby
+"#{ENV['APP_NAME']}_#{ENV['APP_ENV']}_#{model}_event_#{event_raised}"
+# => kangaroo_production_order_event_created
+```
+
+And the content will be:
+```ruby
+# Enveloped
+{
+  event: event,
+  model: model,
+  data: OrderEventSerializer.new(self)
+}.to_json
+# => {
+#   "event": "created",
+#   "model": "order",
+#   "data": {
+#     "hello": "world"
+#   }
+# }
+
+# Not enveloped
+OrderEventSerializer.new(self).to_json
+# => {
+#   "hello": "world"
+# }
+```
+
+#### Options
+| Key | Default | Required | What's it? |
+|-----|---------|----------|------------|
+| `model` | `nil` | true | The model name. |
+| `serializer` | `nil` | true | The serializer used in the payload. |
+| `enveloped` | `true` | false | If true it allows to envelope the payload. |
+| `states` | `[]` | false | The states name list. It will publish in a topic if the state was changed.  |
+| `state_column` | `:state` | false | The state column name. |
+| `actions` | `[]` | false | The actions name list. It will publish in a topic all times that the event happens. It allows the values `%i(created updated destroyed)`. |
+| `rescue_errors` | `false` | false | If true it allows to prevent errors. |
+| `notify_rescued_error` | `false` | false | If true it allows to notify when error is raised. |
+| `delayed` | `[]` | false | The events that you would like performing with delay. It requires DelayedJob. E.g: `%i(created updated completed)` |
+
 ## Contributing
 
 1. Fork it
