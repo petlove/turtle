@@ -153,7 +153,7 @@ act_as_notification model: 'order',
                     actions: %i(created updated destroyed),
                     rescue_errors: false,
                     notify_rescued_error: false,
-                    delayed: %i(create update destroy)
+                    delayed: %i(created updated completed)
 ```
 
 The topic name that will be publicated follows the structure:
