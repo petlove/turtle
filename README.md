@@ -148,6 +148,8 @@ include Turtle::EventNotificator
 act_as_notification model: 'order',
                     enveloped: true,
                     serializer: OrderEventSerializer,
+                    serializer_options: { root: false },
+                    serializer_root: :data,
                     states: %i(pending completed),
                     state_column: :state,
                     actions: %i(created updated destroyed),
@@ -190,6 +192,8 @@ OrderEventSerializer.new(self).to_json
 |-----|---------|----------|------------|
 | `model` | `nil` | true | The model name. |
 | `serializer` | `nil` | true | The serializer used in the payload. |
+| `serializer_options` | `{}` | false | The serializer options. |
+| `serializer_root` | `nil` | false | The serializer root field. If `nil` will be returned the original root. |
 | `enveloped` | `true` | false | If true it allows to envelope the payload. |
 | `states` | `[]` | false | The states name list. It will publish in a topic if the state was changed.  |
 | `state_column` | `:state` | false | The state column name. |

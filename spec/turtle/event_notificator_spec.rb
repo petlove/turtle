@@ -113,11 +113,15 @@ RSpec.describe Turtle::EventNotificator, type: :module do
     class OrderInstanceMethods
       include Turtle::EventNotificator::InstanceMethods
 
-      def initialize(klass); end
+      def initialize(klass, options); end
+
+      def as_json
+        { hello: :world }
+      end
     end
 
     describe '#event_notificator_options!' do
-      let(:order) { OrderInstanceMethods.new(nil) }
+      let(:order) { OrderInstanceMethods.new(nil, {}) }
       before { subject }
       subject do
         order.event_notificator_options!(
@@ -138,6 +142,7 @@ RSpec.describe Turtle::EventNotificator, type: :module do
           enveloped: true,
           states: %i[pending completed],
           state_column: :state,
+          serializer_options: {},
           actions: %i[create update destroy],
           rescue_errors: false,
           notify_rescued_error: false,
@@ -154,7 +159,7 @@ RSpec.describe Turtle::EventNotificator, type: :module do
     end
 
     describe '#event_notificator_before_callback!' do
-      let(:order) { OrderInstanceMethods.new(nil) }
+      let(:order) { OrderInstanceMethods.new(nil, {}) }
       before do
         allow(order).to receive(:state_was).and_return('processing')
         order.event_notificator_options!(
@@ -198,7 +203,7 @@ RSpec.describe Turtle::EventNotificator, type: :module do
     end
 
     describe '#event_notificator_after_callback!' do
-      let(:order) { OrderInstanceMethods.new(nil) }
+      let(:order) { OrderInstanceMethods.new(nil, {}) }
       before do
         allow(order).to receive(:state_was).and_return('processing')
         order.event_notificator_options!(
@@ -257,7 +262,7 @@ RSpec.describe Turtle::EventNotificator, type: :module do
     end
 
     describe '#event_notificator_notify!' do
-      let(:order) { OrderInstanceMethods.new(nil) }
+      let(:order) { OrderInstanceMethods.new(nil, {}) }
       before do
         allow(order).to receive(:state_was).and_return('processing')
         allow(order).to receive(:payload!).and_return(hello: :world)
@@ -265,6 +270,8 @@ RSpec.describe Turtle::EventNotificator, type: :module do
           model: 'order',
           enveloped: true,
           serializer: OrderInstanceMethods,
+          serializer_options: { root: false },
+          serializer_root: :data,
           states: %i[pending completed],
           state_column: :state,
           actions: %i[created updated destroyed],
@@ -313,6 +320,14 @@ RSpec.describe Turtle::EventNotificator, type: :module do
           expect(order.event_notificator_before_callback).to be_nil
           expect(order.event_notificator_after_callback).to be_nil
           expect(order.event_notificator_notifications.empty?).to be_truthy
+        end
+
+        it 'should call to build payload' do
+          expect(order).to receive(:build_event_notificator_payload).once.and_call_original
+          expect(order).to receive(:event_notificator_serializer).once.and_call_original
+          expect_any_instance_of(Turtle::EventNotificator::Notification).to receive(:publish!)
+            .exactly(order.event_notificator_notifications.compact.length)
+          subject
         end
 
         it 'shouldnt publish for each notification' do
