@@ -77,7 +77,7 @@ module Turtle
         notifications = event_notificator_notifications.compact.uniq(&:event)
         return if notifications.empty?
 
-        payload = @event_notificator_options[:serializer].new(self)
+        payload = build_event_notificator_payload
         notifications.each { |notification| notification.publish!(payload, @event_notificator_options) }
       ensure
         event_notificator_cleanup!
@@ -89,6 +89,16 @@ module Turtle
         @event_notificator_notifications += @event_notificator_events.map do |event|
           build_event_notificator_notification_by_event(event)
         end
+      end
+
+      def build_event_notificator_payload
+        return event_notificator_serializer unless @event_notificator_options[:serializer_root]
+
+        event_notificator_serializer.as_json[@event_notificator_options[:serializer_root]]
+      end
+
+      def event_notificator_serializer
+        @event_notificator_options[:serializer].new(self, @event_notificator_options[:serializer_options])
       end
 
       def build_event_notificator_notification_by_event(event)
@@ -133,6 +143,7 @@ module Turtle
       def default_event_notificator_options
         {
           enveloped: true,
+          serializer_options: {},
           states: [],
           state_column: :state,
           actions: [],
