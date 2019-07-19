@@ -17,16 +17,16 @@ module Turtle
       rescue StandardError => e
         raise unless options[:rescue_errors]
 
-        if options[:notify_rescued_error]
-          Honeybadger.notify(
-            e,
-            context: topic_options(options),
-            parameters: payload.as_json
-          )
-        end
+        notify_error!(e, payload, options)
       end
 
       private
+
+      def notify_error!(error, payload, options)
+        return unless options[:notify_rescued_error]
+
+        Honeybadger.notify(error, context: topic_options(options), parameters: payload.as_json)
+      end
 
       def publish_options(options)
         {
