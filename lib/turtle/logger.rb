@@ -24,7 +24,7 @@ module Turtle
       private
 
       def log?
-        ENV['TURTLE_LOGGER']
+        ENV[LOGGER_ENABLED_ENV]
       end
 
       def log(severity_level, message)
