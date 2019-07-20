@@ -59,6 +59,14 @@ RSpec.describe Turtle::EventNotificator, type: :module do
             expect(order).to receive(:build_event_notificator_notify!)
             subject
           end
+
+          context 'with error in builders' do
+            before { allow(order).to receive(:initialize_event_notificator).and_raise(StandardError) }
+
+            it 'should be nil' do
+              is_expected.to be_nil
+            end
+          end
         end
 
         context 'with all params' do

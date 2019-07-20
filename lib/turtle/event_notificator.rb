@@ -14,14 +14,20 @@ module Turtle
         raise ModelRequiredError unless options[:model]
         return unless available_events?(options)
 
+        event_notificator_builders!(options)
+      end
+
+      private
+
+      def event_notificator_builders!(options)
         initialize_event_notificator
         build_event_notificator_options!(options)
         build_event_notificator_before_callback!
         build_event_notificator_after_callback!
         build_event_notificator_notify!
+      rescue StandardError
+        nil
       end
-
-      private
 
       def available_events?(options)
         (options[:states] && options[:states].any?) || (options[:actions] && options[:actions].any?)
