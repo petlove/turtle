@@ -20,7 +20,9 @@ Gem::Specification.new do |spec|
   spec.required_ruby_version = '>= 2.2.10'
 
   spec.add_dependency 'aws-sdk-sns', '>= 1.18.0'
-  spec.add_dependency 'honeybadger', '~> 4.0'
+  spec.add_dependency 'aws-sns-configurator', '>= 0.1.0'
+  spec.add_dependency 'aws-sqs-configurator', '>= 0.1.0'
+  spec.add_dependency 'honeybadger', '>= 2.0.0'
   spec.add_dependency 'ruby-utils', '>= 0.1.0'
 
   spec.add_development_dependency 'bundler', '~> 1.17.3'
