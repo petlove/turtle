@@ -10,7 +10,7 @@ module Turtle
       DEFAULT_ACTIONS = %i[create update destroy].freeze
 
       def act_as_notification(options)
-        return if defined?(Rails) && Rails.env.test?
+        return if defined?(Rails) && Rails.env.test? && !ENV['TURTLE_TEST']
         raise ModelRequiredError unless options[:model]
         return unless available_events?(options)
 
