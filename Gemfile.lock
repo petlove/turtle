@@ -18,7 +18,7 @@ GIT
 PATH
   remote: .
   specs:
-    turtle (0.1.1)
+    turtle (0.2.0)
       aws-sns-configurator (~> 0.2.0)
       aws-sqs-configurator (~> 0.2.0)
       honeybadger (~> 4.0)
