@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'turtle/version'
 require 'turtle/queue'
 require 'turtle/topic'

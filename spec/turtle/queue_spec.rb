@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.describe Turtle::Queue, type: :model do
   describe '#shoryuken_queues_priorities' do
     subject { described_class.shoryuken_priorities(options) }

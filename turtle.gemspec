@@ -19,9 +19,9 @@ Gem::Specification.new do |spec|
   spec.require_paths = ['lib']
   spec.required_ruby_version = '>= 2.5.6'
 
-  spec.add_dependency 'honeybadger', '~> 4.0'
   spec.add_dependency 'aws-sns-configurator', '~> 0.2.0'
   spec.add_dependency 'aws-sqs-configurator', '~> 0.2.0'
+  spec.add_dependency 'honeybadger', '~> 4.0'
 
   spec.add_development_dependency 'bundler', '~> 2.0.2'
   spec.add_development_dependency 'rake', '~> 10.0'

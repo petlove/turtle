@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.describe Turtle::Topic, type: :model do
   describe '#delayed_job_queue_attributes' do
     subject { described_class.delayed_job_queue_attributes }

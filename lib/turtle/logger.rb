@@ -2,7 +2,7 @@
 
 module Turtle
   module Logger
-    LOGGER_ENABLED_ENV = 'TURTLE_LOGGER'.freeze
+    LOGGER_ENABLED_ENV = 'TURTLE_LOGGER'
 
     class << self
       def info(message)
