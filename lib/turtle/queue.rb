@@ -1,8 +1,10 @@
+# frozen_string_literal: true
+
 require 'aws/sqs/configurator'
 
 module Turtle
   class Queue
-    DELAYED_JOB_QUEUE_PREFIX = 'queue'.freeze
+    DELAYED_JOB_QUEUE_PREFIX = 'queue'
 
     class << self
       def shoryuken_priorities(options)
@@ -39,7 +41,7 @@ module Turtle
       end
 
       def seconds?(options)
-        seconds(options) > 0
+        seconds(options).positive?
       end
 
       def seconds(options)

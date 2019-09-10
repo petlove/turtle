@@ -1,9 +1,11 @@
+# frozen_string_literal: true
+
 module Turtle
   module EventNotificator
     class Notification
-      TOPIC_PREFIX_ENV = 'APP_NAME'.freeze
-      TOPIC_ENVIRONMENT_ENV = 'APP_ENV'.freeze
-      TOPIC_EVENT_PREFIX = 'event'.freeze
+      TOPIC_PREFIX_ENV = 'APP_NAME'
+      TOPIC_ENVIRONMENT_ENV = 'APP_ENV'
+      TOPIC_EVENT_PREFIX = 'event'
 
       attr_accessor :event
 
@@ -30,7 +32,7 @@ module Turtle
 
       def publish_options(options)
         {
-          delayed: options[:delayed] && options[:delayed].find { |name| name == @event },
+          delayed: options[:delayed]&.find { |name| name == @event },
           model: options[:enveloped] && options[:model],
           event: options[:enveloped] && @event
         }

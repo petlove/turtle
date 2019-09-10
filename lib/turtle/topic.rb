@@ -1,8 +1,10 @@
+# frozen_string_literal: true
+
 require 'aws/sns/configurator'
 
 module Turtle
   class Topic
-    DELAYED_JOB_QUEUE_PREFIX = 'topic'.freeze
+    DELAYED_JOB_QUEUE_PREFIX = 'topic'
 
     class << self
       def delayed_job_queue_attributes

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Turtle
   module EventNotificator
     class ModelRequiredError < StandardError; end
@@ -30,7 +32,7 @@ module Turtle
       end
 
       def available_events?(options)
-        (options[:states] && options[:states].any?) || (options[:actions] && options[:actions].any?)
+        (options[:states]&.any?) || (options[:actions]&.any?)
       end
 
       def initialize_event_notificator
