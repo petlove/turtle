@@ -32,7 +32,7 @@ module Turtle
       end
 
       def available_events?(options)
-        (options[:states]&.any?) || (options[:actions]&.any?)
+        options[:states]&.any? || options[:actions]&.any?
       end
 
       def initialize_event_notificator
@@ -92,6 +92,12 @@ module Turtle
         event_notificator_cleanup!
       end
 
+      def __build_state_value__
+        send("#{@event_notificator_options[:state_column]}_was")
+      rescue StandardError
+        nil
+      end
+
       private
 
       def create_event_notificator_notifications!
@@ -115,7 +121,7 @@ module Turtle
       end
 
       def build_event_notificator_callback(action)
-        { state: send("#{@event_notificator_options[:state_column]}_was"), action: event_notificator_action(action) }
+        { state: __build_state_value__, action: event_notificator_action(action) }
       end
 
       def event_notificator_cleanup!

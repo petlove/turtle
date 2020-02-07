@@ -347,5 +347,37 @@ RSpec.describe Turtle::EventNotificator, type: :module do
         end
       end
     end
+
+    describe '#__build_state_value__' do
+      subject { order.__build_state_value__ }
+
+      before do
+        order.event_notificator_options!(
+          model: 'order',
+          enveloped: true,
+          serializer: OrderInstanceMethods,
+          serializer_options: { root: false },
+          serializer_root: :data,
+          states: %i[pending completed],
+          state_column: :state,
+          actions: %i[created updated destroyed],
+          rescue_errors: false,
+          notify_rescued_error: false,
+          delayed: %i[created updated destroyed]
+        )
+      end
+
+      let(:order) { OrderInstanceMethods.new(nil, {}) }
+
+      context 'without state_was' do
+        it { is_expected.to be_nil }
+      end
+
+      context 'with state_was' do
+        before { allow(order).to receive(:state_was).and_return('canceled') }
+
+        it { is_expected.to eq('canceled') }
+      end
+    end
   end
 end
