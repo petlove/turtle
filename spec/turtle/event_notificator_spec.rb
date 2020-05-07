@@ -102,7 +102,6 @@ RSpec.describe Turtle::EventNotificator, type: :module do
 
           it 'should invoke callbacks' do
             expect(order).to receive(:send).with(:include, Turtle::EventNotificator::InstanceMethods).once
-            expect(order).to receive(:send).with('touch', any_args).once
             expect(order).to receive(:send).with('before_create', any_args).twice
             expect(order).to receive(:send).with('before_update', any_args).twice
             expect(order).to receive(:send).with('before_destroy', any_args).twice
