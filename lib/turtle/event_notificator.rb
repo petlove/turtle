@@ -57,6 +57,7 @@ module Turtle
       end
 
       def build_event_notificator_options!(options)
+        send('touch', ->(base) { base.event_notificator_options!(options) })
         DEFAULT_ACTIONS.each do |action|
           send("before_#{action}", ->(base) { base.event_notificator_options!(options) })
         end
