@@ -61,7 +61,7 @@ GEM
       concurrent-ruby (~> 1.0)
     jaro_winkler (1.5.3)
     jmespath (1.4.0)
-    json (2.3.0)
+    json (2.3.1)
     method_source (0.9.2)
     minitest (5.14.1)
     parallel (1.17.0)
@@ -99,7 +99,7 @@ GEM
       docile (~> 1.1)
       json (>= 1.8, < 3)
       simplecov-html (~> 0.10.0)
-    simplecov-console (0.5.0)
+    simplecov-console (0.7.2)
       ansi
       simplecov
       terminal-table
@@ -112,7 +112,7 @@ GEM
     thread_safe (0.3.6)
     tzinfo (1.2.7)
       thread_safe (~> 0.1)
-    unicode-display_width (1.6.0)
+    unicode-display_width (1.6.1)
     zeitwerk (2.3.0)
 
 PLATFORMS
