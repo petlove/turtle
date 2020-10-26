@@ -61,7 +61,6 @@ GEM
       concurrent-ruby (~> 1.0)
     jaro_winkler (1.5.3)
     jmespath (1.4.0)
-    json (2.3.0)
     method_source (1.0.0)
     minitest (5.14.1)
     parallel (1.17.0)
@@ -95,15 +94,14 @@ GEM
     rubocop-performance (1.4.1)
       rubocop (>= 0.71.0)
     ruby-progressbar (1.10.1)
-    simplecov (0.17.1)
+    simplecov (0.19.1)
       docile (~> 1.1)
-      json (>= 1.8, < 3)
-      simplecov-html (~> 0.10.0)
+      simplecov-html (~> 0.11)
     simplecov-console (0.5.0)
       ansi
       simplecov
       terminal-table
-    simplecov-html (0.10.2)
+    simplecov-html (0.12.3)
     simplecov-summary (0.0.6)
       colorize
       simplecov
