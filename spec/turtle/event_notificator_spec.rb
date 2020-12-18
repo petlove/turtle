@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+# rubocop:disable Lint/ConstantDefinitionInBlock
+
 require 'spec_helper'
 
 RSpec.describe Turtle::EventNotificator, type: :module do
@@ -381,3 +383,4 @@ RSpec.describe Turtle::EventNotificator, type: :module do
     end
   end
 end
+# rubocop:enable Lint/ConstantDefinitionInBlock

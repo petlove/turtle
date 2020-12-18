@@ -148,11 +148,11 @@ module Turtle
       end
 
       def event_notificator_action(action)
-        case action
-        when :create then :created
-        when :update then :updated
-        when :destroy then :destroyed
-        end
+        {
+          create: :created,
+          update: :updated,
+          destroy: :destroyed
+        }[action]
       end
 
       def default_event_notificator_options
