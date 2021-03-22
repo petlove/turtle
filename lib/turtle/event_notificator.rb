@@ -26,6 +26,7 @@ module Turtle
         build_event_notificator_options!(options)
         build_event_notificator_before_callback!
         build_event_notificator_after_callback!
+        build_event_notificator_after_touch_callback!
         build_event_notificator_notify!
       rescue StandardError
         nil
@@ -54,6 +55,10 @@ module Turtle
         DEFAULT_ACTIONS.each do |action|
           send("after_#{action}", ->(base) { base.event_notificator_after_callback!(action) })
         end
+      end
+
+      def build_event_notificator_after_touch_callback!
+        send('after_touch', ->(base) { base.save })
       end
 
       def build_event_notificator_options!(options)
