@@ -58,7 +58,7 @@ module Turtle
       end
 
       def build_event_notificator_after_touch_callback!
-        send('after_touch', ->(base) { base.save })
+        send(:after_touch, ->(base) { base.save })
       end
 
       def build_event_notificator_options!(options)
