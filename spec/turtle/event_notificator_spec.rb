@@ -60,6 +60,7 @@ RSpec.describe Turtle::EventNotificator, type: :module do
             expect(order).to receive(:build_event_notificator_options!)
             expect(order).to receive(:build_event_notificator_before_callback!)
             expect(order).to receive(:build_event_notificator_after_callback!)
+            expect(order).to receive(:build_event_notificator_after_touch_callback!)
             expect(order).to receive(:build_event_notificator_notify!)
             subject
           end
@@ -110,6 +111,7 @@ RSpec.describe Turtle::EventNotificator, type: :module do
             expect(order).to receive(:send).with('after_create', any_args).once
             expect(order).to receive(:send).with('after_update', any_args).once
             expect(order).to receive(:send).with('after_destroy', any_args).once
+            expect(order).to receive(:send).with(:after_touch, any_args).once
             expect(order).to receive(:send).with(:after_commit, any_args).once
           end
 
