@@ -2,8 +2,6 @@
 
 module Turtle
   module Logger
-    LOGGER_ENABLED_ENV = 'TURTLE_LOGGER'
-
     class << self
       def info(message)
         puts log_info(message) if log?
@@ -24,7 +22,7 @@ module Turtle
       private
 
       def log?
-        ENV[LOGGER_ENABLED_ENV]
+        true
       end
 
       def log(severity_level, message)

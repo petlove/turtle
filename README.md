@@ -1,7 +1,6 @@
 # [Turtle](https://github.com/petlove/turtle)
-[![Build Status](https://travis-ci.org/petlove/turtle.svg?branch=master)](https://travis-ci.org/petlove/turtle)
-[![Maintainability](https://api.codeclimate.com/v1/badges/66a7166187c323835430/maintainability)](https://codeclimate.com/github/petlove/turtle/maintainability)
-[![Test Coverage](https://api.codeclimate.com/v1/badges/66a7166187c323835430/test_coverage)](https://codeclimate.com/github/petlove/turtle/test_coverage)
+
+[![Run specs](https://github.com/petlove/turtle/actions/workflows/specs.yml/badge.svg)](https://github.com/petlove/turtle/actions/workflows/specs.yml)
 
 A helper to use workers and topics with Ruby on Rails
 
