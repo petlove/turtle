@@ -2,8 +2,8 @@
 
 source 'https://rubygems.org'
 
-gem 'aws-sns-configurator', github: 'petlove/aws-sns-configurator'
-gem 'aws-sqs-configurator', github: 'petlove/aws-sqs-configurator'
+gem 'aws-sqs-configurator', github: 'petlove/aws-sqs-configurator', branch: 'localstack'
+gem 'aws-sns-configurator', github: 'petlove/aws-sns-configurator', branch: 'localstack'
 gem 'honeybadger', '~> 4.0'
 
 group :development, :test do
