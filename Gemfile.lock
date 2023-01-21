@@ -8,7 +8,7 @@ GIT
 
 GIT
   remote: https://github.com/petlove/aws-sqs-configurator.git
-  revision: a64e5a11b43827c208586e1f8331a3a72b49bd7f
+  revision: e8052a944a6cd1b19055262c40280a44721b6893
   specs:
     aws-sqs-configurator (0.2.0)
       aws-sdk-core (~> 3)
