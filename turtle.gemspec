@@ -19,10 +19,18 @@ Gem::Specification.new do |spec|
   spec.require_paths = ['lib']
   spec.required_ruby_version = '>= 2.5.1'
 
-  spec.add_dependency 'aws-sns-configurator', '~> 0.2.0'
-  spec.add_dependency 'aws-sqs-configurator', '~> 0.2.0'
-  spec.add_dependency 'honeybadger', '~> 4.0'
+  spec.add_dependency 'aws-sns-configurator'
+  spec.add_dependency 'aws-sqs-configurator'
+  spec.add_dependency 'honeybadger'
 
-  spec.add_development_dependency 'bundler', '~> 2.0.2'
-  spec.add_development_dependency 'rake', '~> 10.0'
+  spec.add_development_dependency 'bundler'
+  spec.add_development_dependency 'factory_bot'
+  spec.add_development_dependency 'pry'
+  spec.add_development_dependency 'rake'
+  spec.add_development_dependency 'rspec'
+  spec.add_development_dependency 'rubocop'
+  spec.add_development_dependency 'rubocop-performance'
+  spec.add_development_dependency 'simplecov'
+  spec.add_development_dependency 'simplecov-console'
+  spec.add_development_dependency 'simplecov-summary'
 end
