@@ -27,7 +27,7 @@ module Turtle
       def notify_error!(error, payload, options)
         return unless options[:notify_rescued_error]
 
-        Honeybadger.notify(error, context: topic_options(options), parameters: payload.as_json)
+        defined?(Honeybadger) && Honeybadger.notify(error, context: topic_options(options), parameters: payload.as_json)
       end
 
       def publish_options(options)

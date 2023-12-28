@@ -10,7 +10,11 @@ require 'turtle/event_notificator/event'
 require 'turtle/event_notificator/state'
 require 'turtle/event_notificator/action'
 require 'turtle/railtie' if defined?(Rails::Railtie) && defined?(Shoryuken)
-require 'honeybadger'
+begin
+  require 'honeybadger'
+rescue LoadError
+  puts 'Error loading honeybadger lib, moving on...'
+end
 
 module Turtle
   class << self

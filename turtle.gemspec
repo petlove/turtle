@@ -21,7 +21,6 @@ Gem::Specification.new do |spec|
 
   spec.add_dependency 'aws-sns-configurator'
   spec.add_dependency 'aws-sqs-configurator'
-  spec.add_dependency 'honeybadger'
 
   spec.add_development_dependency 'bundler'
   spec.add_development_dependency 'factory_bot'

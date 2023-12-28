@@ -28,6 +28,14 @@ RSpec.describe Turtle::EventNotificator::Notification, type: :model do
     before { allow(notification).to receive(:as_json).and_return(event: notification.event) }
     subject { notification.publish!(notification, options) }
 
+    let(:honeybadger_class) do
+      Class.new do
+        def self.notify(error, context:, parameters:); end
+      end
+    end
+
+    before { stub_const('Honeybadger', honeybadger_class) }
+
     context 'when publish raise an error' do
       before { allow(Turtle).to receive(:publish!).and_raise(StandardError, 'Turtle publish error :(') }
 
@@ -79,7 +87,7 @@ RSpec.describe Turtle::EventNotificator::Notification, type: :model do
           expect(Turtle).to receive(:publish!).with(
             { name: 'event_order', prefix: 'turtle', environment: 'production', suffix: notification.event },
             notification,
-            delayed: nil, event: nil, model: nil
+            { delayed: nil, event: nil, model: nil }
           ).once
           subject
         end
@@ -92,7 +100,7 @@ RSpec.describe Turtle::EventNotificator::Notification, type: :model do
           expect(Turtle).to receive(:publish!).with(
             { name: 'event_order', prefix: 'turtle', environment: 'production', suffix: notification.event },
             notification,
-            delayed: :completed, event: nil, model: nil
+            { delayed: :completed, event: nil, model: nil }
           ).once
           subject
         end
@@ -105,7 +113,7 @@ RSpec.describe Turtle::EventNotificator::Notification, type: :model do
           expect(Turtle).to receive(:publish!).with(
             { name: 'event_order', prefix: 'turtle', environment: 'production', suffix: notification.event },
             notification,
-            delayed: nil, event: false, model: false
+            { delayed: nil, event: false, model: false }
           ).once
           subject
         end
@@ -118,7 +126,7 @@ RSpec.describe Turtle::EventNotificator::Notification, type: :model do
           expect(Turtle).to receive(:publish!).with(
             { name: 'event_order', prefix: 'turtle', environment: 'production', suffix: notification.event },
             notification,
-            delayed: nil, event: :completed, model: 'order'
+            { delayed: nil, event: :completed, model: 'order' }
           ).once
           subject
         end
