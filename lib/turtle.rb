@@ -10,7 +10,6 @@ require 'turtle/event_notificator/event'
 require 'turtle/event_notificator/state'
 require 'turtle/event_notificator/action'
 require 'turtle/railtie' if defined?(Rails::Railtie) && defined?(Shoryuken)
-require 'honeybadger'
 
 module Turtle
   class << self

@@ -31,38 +31,9 @@ RSpec.describe Turtle::EventNotificator::Notification, type: :model do
     context 'when publish raise an error' do
       before { allow(Turtle).to receive(:publish!).and_raise(StandardError, 'Turtle publish error :(') }
 
-      context 'when rescue errors isnt enabled' do
-        let(:options) { { rescue_errors: false } }
-
-        it 'should raise an error' do
-          expect { subject }.to raise_error(StandardError, 'Turtle publish error :(')
-        end
-      end
-
-      context 'when rescue errors is enabled' do
-        let(:options) { { rescue_errors: true } }
-
-        it 'should raise an error' do
-          is_expected.to be_nil
-        end
-
-        context 'when notify rescued error isnt enabled' do
-          let(:options) { { rescue_errors: true, notify_rescued_error: false } }
-
-          it 'shouldnt notify through' do
-            expect(Honeybadger).not_to receive(:notify)
-            subject
-          end
-        end
-
-        context 'when notify rescued error is enabled' do
-          let(:options) { { rescue_errors: true, notify_rescued_error: true } }
-
-          it 'shouldnt notify through' do
-            expect(Honeybadger).to receive(:notify).once
-            subject
-          end
-        end
+      let(:options) { {} }
+      it 'should raise an error' do
+        expect { subject }.to raise_error(StandardError, 'Turtle publish error :(')
       end
     end
 
@@ -79,7 +50,7 @@ RSpec.describe Turtle::EventNotificator::Notification, type: :model do
           expect(Turtle).to receive(:publish!).with(
             { name: 'event_order', prefix: 'turtle', environment: 'production', suffix: notification.event },
             notification,
-            delayed: nil, event: nil, model: nil
+            { delayed: nil, event: nil, model: nil }
           ).once
           subject
         end
@@ -92,7 +63,7 @@ RSpec.describe Turtle::EventNotificator::Notification, type: :model do
           expect(Turtle).to receive(:publish!).with(
             { name: 'event_order', prefix: 'turtle', environment: 'production', suffix: notification.event },
             notification,
-            delayed: :completed, event: nil, model: nil
+            { delayed: :completed, event: nil, model: nil }
           ).once
           subject
         end
@@ -105,7 +76,7 @@ RSpec.describe Turtle::EventNotificator::Notification, type: :model do
           expect(Turtle).to receive(:publish!).with(
             { name: 'event_order', prefix: 'turtle', environment: 'production', suffix: notification.event },
             notification,
-            delayed: nil, event: false, model: false
+            { delayed: nil, event: false, model: false }
           ).once
           subject
         end
@@ -118,7 +89,7 @@ RSpec.describe Turtle::EventNotificator::Notification, type: :model do
           expect(Turtle).to receive(:publish!).with(
             { name: 'event_order', prefix: 'turtle', environment: 'production', suffix: notification.event },
             notification,
-            delayed: nil, event: :completed, model: 'order'
+            { delayed: nil, event: :completed, model: 'order' }
           ).once
           subject
         end
