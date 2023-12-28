@@ -95,8 +95,6 @@ RSpec.describe Turtle::EventNotificator, type: :module do
               states: %i[pending completed],
               state_column: :state,
               actions: %i[created updated destroyed],
-              rescue_errors: false,
-              notify_rescued_error: false,
               delayed: %i[created updated destroyed]
             }
           end
@@ -145,8 +143,6 @@ RSpec.describe Turtle::EventNotificator, type: :module do
           states: %i[pending completed],
           state_column: :state,
           actions: %i[create update destroy],
-          rescue_errors: false,
-          notify_rescued_error: false,
           delayed: %i[created updated destroyed]
         )
       end
@@ -158,9 +154,6 @@ RSpec.describe Turtle::EventNotificator, type: :module do
           state_column: :state,
           serializer_options: {},
           actions: %i[create update destroy],
-          rescue_errors: false,
-          notify_rescued_error: false,
-          continue_after_rescued_error: false,
           delayed: %i[created updated destroyed],
           model: 'order',
           serializer: OrderInstanceMethods
@@ -183,8 +176,6 @@ RSpec.describe Turtle::EventNotificator, type: :module do
           states: %i[pending completed],
           state_column: :state,
           actions: %i[created updated destroyed],
-          rescue_errors: false,
-          notify_rescued_error: false,
           delayed: %i[created updated destroyed]
         )
         subject
@@ -227,8 +218,6 @@ RSpec.describe Turtle::EventNotificator, type: :module do
           states: %i[pending completed],
           state_column: :state,
           actions: %i[created updated],
-          rescue_errors: false,
-          notify_rescued_error: false,
           delayed: %i[created updated destroyed]
         )
         order.event_notificator_before_callback!(:update)
@@ -289,8 +278,6 @@ RSpec.describe Turtle::EventNotificator, type: :module do
           states: %i[pending completed],
           state_column: :state,
           actions: %i[created updated destroyed],
-          rescue_errors: false,
-          notify_rescued_error: false,
           delayed: %i[created updated destroyed]
         )
         order.event_notificator_before_callback!(:update)
@@ -365,8 +352,6 @@ RSpec.describe Turtle::EventNotificator, type: :module do
           states: %i[pending completed],
           state_column: :state,
           actions: %i[created updated destroyed],
-          rescue_errors: false,
-          notify_rescued_error: false,
           delayed: %i[created updated destroyed]
         )
       end

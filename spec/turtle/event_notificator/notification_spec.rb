@@ -28,49 +28,12 @@ RSpec.describe Turtle::EventNotificator::Notification, type: :model do
     before { allow(notification).to receive(:as_json).and_return(event: notification.event) }
     subject { notification.publish!(notification, options) }
 
-    let(:honeybadger_class) do
-      Class.new do
-        def self.notify(error, context:, parameters:); end
-      end
-    end
-
-    before { stub_const('Honeybadger', honeybadger_class) }
-
     context 'when publish raise an error' do
       before { allow(Turtle).to receive(:publish!).and_raise(StandardError, 'Turtle publish error :(') }
 
-      context 'when rescue errors isnt enabled' do
-        let(:options) { { rescue_errors: false } }
-
-        it 'should raise an error' do
-          expect { subject }.to raise_error(StandardError, 'Turtle publish error :(')
-        end
-      end
-
-      context 'when rescue errors is enabled' do
-        let(:options) { { rescue_errors: true } }
-
-        it 'should raise an error' do
-          is_expected.to be_nil
-        end
-
-        context 'when notify rescued error isnt enabled' do
-          let(:options) { { rescue_errors: true, notify_rescued_error: false } }
-
-          it 'shouldnt notify through' do
-            expect(Honeybadger).not_to receive(:notify)
-            subject
-          end
-        end
-
-        context 'when notify rescued error is enabled' do
-          let(:options) { { rescue_errors: true, notify_rescued_error: true } }
-
-          it 'shouldnt notify through' do
-            expect(Honeybadger).to receive(:notify).once
-            subject
-          end
-        end
+      let(:options) { {} }
+      it 'should raise an error' do
+        expect { subject }.to raise_error(StandardError, 'Turtle publish error :(')
       end
     end
 

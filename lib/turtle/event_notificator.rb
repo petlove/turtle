@@ -167,9 +167,6 @@ module Turtle
           states: [],
           state_column: :state,
           actions: [],
-          rescue_errors: false,
-          notify_rescued_error: false,
-          continue_after_rescued_error: false,
           delayed: []
         }
       end

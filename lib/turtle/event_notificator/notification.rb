@@ -16,19 +16,9 @@ module Turtle
       def publish!(payload, options)
         Logger.info("[Event Notification] Model: #{options[:model]} Event: #{@event}")
         Turtle.publish!(topic_options(options), payload, publish_options(options))
-      rescue StandardError => e
-        raise unless options[:rescue_errors]
-
-        notify_error!(e, payload, options)
       end
 
       private
-
-      def notify_error!(error, payload, options)
-        return unless options[:notify_rescued_error]
-
-        defined?(Honeybadger) && Honeybadger.notify(error, context: topic_options(options), parameters: payload.as_json)
-      end
 
       def publish_options(options)
         {
