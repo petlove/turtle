@@ -19,9 +19,6 @@ Gem::Specification.new do |spec|
   spec.require_paths = ['lib']
   spec.required_ruby_version = '>= 2.5.1'
 
-  spec.add_dependency 'aws-sns-configurator'
-  spec.add_dependency 'aws-sqs-configurator'
-
   spec.add_development_dependency 'bundler'
   spec.add_development_dependency 'factory_bot'
   spec.add_development_dependency 'pry'
