@@ -1,0 +1,52 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://sns.us-east-1.amazonaws.com/
+    body:
+      encoding: UTF-8
+      string: Action=GetTopicAttributes&TopicArn=arn%3Aaws%3Asns%3Aus-east-1%3A123456789%3Aprices_production_update_price_warning&Version=2010-03-31
+    headers:
+      Content-Type:
+      - application/x-www-form-urlencoded; charset=utf-8
+      Accept-Encoding:
+      - ''
+      User-Agent:
+      - aws-sdk-ruby3/3.58.0 ruby/2.6.2 x86_64-linux aws-sdk-sns/1.18.0
+      Host:
+      - sns.us-east-1.amazonaws.com
+      X-Amz-Date:
+      - 20190702T211131Z
+      X-Amz-Content-Sha256:
+      - d5180b5091bf6cb6a7da1b6a2a8f5efc9acf11ce7447e4683a46de91c0844efa
+      Content-Length:
+      - '134'
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 403
+      message: Forbidden
+    headers:
+      X-Amzn-Requestid:
+      - 014ed4c7-dd93-5e45-b8b2-8152175713fc
+      Content-Type:
+      - text/xml
+      Content-Length:
+      - '292'
+      Date:
+      - Tue, 02 Jul 2019 21:11:31 GMT
+    body:
+      encoding: UTF-8
+      string: |
+        <ErrorResponse xmlns="http://sns.amazonaws.com/doc/2010-03-31/">
+          <Error>
+            <Type>Sender</Type>
+            <Code>InvalidClientTokenId</Code>
+            <Message>No account found for the given parameters</Message>
+          </Error>
+          <RequestId>014ed4c7-dd93-5e45-b8b2-8152175713fc</RequestId>
+        </ErrorResponse>
+    http_version:
+  recorded_at: Tue, 02 Jul 2019 21:11:32 GMT
+recorded_with: VCR 5.0.0

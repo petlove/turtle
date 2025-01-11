@@ -15,7 +15,7 @@ RSpec.describe Turtle::Topic, type: :model do
 
   describe '#publish!' do
     let(:data) { { hello: :data } }
-    before { ENV['AWS_ACCOUNT_ID'] = '10' }
+    before { ENV['AWS_ACCOUNT_ID'] = '000000000000' }
     subject { described_class.publish!(topic, data, options) }
     before do
       allow(AWS::SNS::Configurator).to receive(:delay).and_return(Object)

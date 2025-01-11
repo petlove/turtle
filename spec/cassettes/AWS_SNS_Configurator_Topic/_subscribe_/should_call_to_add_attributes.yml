@@ -1,0 +1,98 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: "<AWS_SQS_ENDPOINT>/"
+    body:
+      encoding: UTF-8
+      string: Action=Subscribe&Endpoint=arn%3Aaws%3Asqs%3Aus-east-1%3A000000000000%3Alinqueta_production_queue_failures&Protocol=sqs&TopicArn=arn%3Aaws%3Asns%3Aus-east-1%3A000000000000%3Aupdate_price&Version=2010-03-31
+    headers:
+      Content-Type:
+      - application/x-www-form-urlencoded; charset=utf-8
+      Accept-Encoding:
+      - ''
+      User-Agent:
+      - aws-sdk-ruby3/3.58.0 ruby/2.6.2 x86_64-linux aws-sdk-sns/1.18.0
+      Host:
+      - sns.us-east-1.amazonaws.com
+      X-Amz-Date:
+      - 20190703T140433Z
+      X-Amz-Content-Sha256:
+      - 4b58513d18657bf67a7afcbdd34c92149f76559c50bf021ec61ffed1206d6142
+      Content-Length:
+      - '204'
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      X-Amzn-Requestid:
+      - 79ec5bdc-4faf-505b-a511-0e4af79d881d
+      Content-Type:
+      - text/xml
+      Content-Length:
+      - '362'
+      Date:
+      - Wed, 03 Jul 2019 14:04:33 GMT
+    body:
+      encoding: UTF-8
+      string: |
+        <SubscribeResponse xmlns="http://sns.amazonaws.com/doc/2010-03-31/">
+          <SubscribeResult>
+            <SubscriptionArn>arn:aws:sns:us-east-1:000000000000:update_price:e1ccce4d-1917-400c-aeab-2e5eb58d37ee</SubscriptionArn>
+          </SubscribeResult>
+          <ResponseMetadata>
+            <RequestId>79ec5bdc-4faf-505b-a511-0e4af79d881d</RequestId>
+          </ResponseMetadata>
+        </SubscribeResponse>
+    http_version:
+  recorded_at: Wed, 03 Jul 2019 14:04:34 GMT
+- request:
+    method: post
+    uri: "<AWS_SQS_ENDPOINT>/"
+    body:
+      encoding: UTF-8
+      string: Action=SetSubscriptionAttributes&AttributeName=RawMessageDelivery&AttributeValue=true&SubscriptionArn=arn%3Aaws%3Asns%3Aus-east-1%3A000000000000%3Aupdate_price%3Ae1ccce4d-1917-400c-aeab-2e5eb58d37ee&Version=2010-03-31
+    headers:
+      Content-Type:
+      - application/x-www-form-urlencoded; charset=utf-8
+      Accept-Encoding:
+      - ''
+      User-Agent:
+      - aws-sdk-ruby3/3.58.0 ruby/2.6.2 x86_64-linux aws-sdk-sns/1.18.0
+      Host:
+      - sns.us-east-1.amazonaws.com
+      X-Amz-Date:
+      - 20190703T140434Z
+      X-Amz-Content-Sha256:
+      - 3f37ead0e5b43932ae9561c642d7b427f0db9a0c64d669f75734e0ae0b05a5e8
+      Content-Length:
+      - '217'
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      X-Amzn-Requestid:
+      - 9cc484c7-358a-5164-b873-d1518db869b1
+      Content-Type:
+      - text/xml
+      Content-Length:
+      - '229'
+      Date:
+      - Wed, 03 Jul 2019 14:04:33 GMT
+    body:
+      encoding: UTF-8
+      string: |
+        <SetSubscriptionAttributesResponse xmlns="http://sns.amazonaws.com/doc/2010-03-31/">
+          <ResponseMetadata>
+            <RequestId>9cc484c7-358a-5164-b873-d1518db869b1</RequestId>
+          </ResponseMetadata>
+        </SetSubscriptionAttributesResponse>
+    http_version:
+  recorded_at: Wed, 03 Jul 2019 14:04:34 GMT
+recorded_with: VCR 5.0.0

@@ -10,5 +10,6 @@
 .rspec_status
 *.development
 *.test
+!.env.test
 tags
 Gemfile.lock
