@@ -1,0 +1,7 @@
+---
+default:
+  general:
+    region: 'us-east-1'
+    prefix: 'prices'
+    suffix: 'warning'
+    environment: 'production'

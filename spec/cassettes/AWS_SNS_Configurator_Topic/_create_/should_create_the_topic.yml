@@ -1,0 +1,52 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: "<AWS_SQS_ENDPOINT>/"
+    body:
+      encoding: UTF-8
+      string: Action=CreateTopic&Name=update_price&Version=2010-03-31
+    headers:
+      Content-Type:
+      - application/x-www-form-urlencoded; charset=utf-8
+      Accept-Encoding:
+      - ''
+      User-Agent:
+      - aws-sdk-ruby3/3.58.0 ruby/2.6.2 x86_64-linux aws-sdk-sns/1.18.0
+      Host:
+      - sns.us-east-1.amazonaws.com
+      X-Amz-Date:
+      - 20190702T210504Z
+      X-Amz-Content-Sha256:
+      - 44c4eebe00edb618fa9bc2394060360036fe66b0303f4fa574e31c2dff14246d
+      Content-Length:
+      - '55'
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      X-Amzn-Requestid:
+      - 1057d803-1843-5b60-97de-8d96d1012497
+      Content-Type:
+      - text/xml
+      Content-Length:
+      - '319'
+      Date:
+      - Tue, 02 Jul 2019 21:05:06 GMT
+    body:
+      encoding: UTF-8
+      string: |
+        <CreateTopicResponse xmlns="http://sns.amazonaws.com/doc/2010-03-31/">
+          <CreateTopicResult>
+            <TopicArn>arn:aws:sns:us-east-1:000000000000:update_price</TopicArn>
+          </CreateTopicResult>
+          <ResponseMetadata>
+            <RequestId>1057d803-1843-5b60-97de-8d96d1012497</RequestId>
+          </ResponseMetadata>
+        </CreateTopicResponse>
+    http_version:
+  recorded_at: Tue, 02 Jul 2019 21:05:05 GMT
+recorded_with: VCR 5.0.0

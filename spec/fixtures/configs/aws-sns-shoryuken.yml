@@ -1,0 +1,10 @@
+---
+default:
+  general:
+    region: 'us-east-1'
+    prefix: 'prices'
+    suffix: 'warning'
+    environment: 'production'
+topics:
+  - name: 'linquetaaaa_price_updater'
+    region: 'us-east-2'

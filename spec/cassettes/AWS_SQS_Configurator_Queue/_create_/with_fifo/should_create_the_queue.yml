@@ -1,0 +1,113 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: "<AWS_SQS_ENDPOINT>/"
+    body:
+      encoding: UTF-8
+      string: Action=CreateQueue&Attribute.1.Name=FifoQueue&Attribute.1.Value=true&Attribute.2.Name=ContentBasedDeduplication&Attribute.2.Value=false&QueueName=fifo_queue.fifo&Version=2012-11-05
+    headers:
+      Accept-Encoding:
+      - ''
+      User-Agent:
+      - aws-sdk-ruby3/3.169.0 ruby/2.7.5 x86_64-linux aws-sdk-sqs/1.34.0
+      Content-Type:
+      - application/x-www-form-urlencoded; charset=utf-8
+      Host:
+      - localstack:4566
+      X-Amz-Date:
+      - 20230128T211315Z
+      X-Amz-Content-Sha256:
+      - c12083e76bbcfff29a6e36418a4ea997e6210eb8858da67b24f64209088e9fcc
+      Authorization:
+      - AWS4-HMAC-SHA256 Credential=<AWS_ACCESS_KEY_ID>/20230128/us-east-1/sqs/aws4_request,
+        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=98912481b57c0ce05ac55959b8a8e73bd44170955dbbf0d962833655f041d7ec
+      Content-Length:
+      - '180'
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      Content-Type:
+      - text/xml
+      Content-Length:
+      - '378'
+      Connection:
+      - close
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Methods:
+      - HEAD,GET,PUT,POST,DELETE,OPTIONS,PATCH
+      Access-Control-Allow-Headers:
+      - authorization,cache-control,content-length,content-md5,content-type,etag,location,x-amz-acl,x-amz-content-sha256,x-amz-date,x-amz-request-id,x-amz-security-token,x-amz-tagging,x-amz-target,x-amz-user-agent,x-amz-version-id,x-amzn-requestid,x-localstack-target,amz-sdk-invocation-id,amz-sdk-request
+      Access-Control-Expose-Headers:
+      - etag,x-amz-version-id
+      Date:
+      - Sat, 28 Jan 2023 21:13:15 GMT
+      Server:
+      - hypercorn-h11
+    body:
+      encoding: UTF-8
+      string: |-
+        <?xml version='1.0' encoding='utf-8'?>
+        <CreateQueueResponse xmlns="http://queue.amazonaws.com/doc/2012-11-05/"><CreateQueueResult><QueueUrl>http://queue.localhost.localstack.cloud:4566/<AWS_ACCOUNT_ID>/fifo_queue.fifo</QueueUrl></CreateQueueResult><ResponseMetadata><RequestId>DHJFDIJ24PV1A9HBIPFX0NGCZZPMFWQTHDKMHUYR1O9Z8RM8ED0Z</RequestId></ResponseMetadata></CreateQueueResponse>
+  recorded_at: Sat, 28 Jan 2023 21:13:15 GMT
+- request:
+    method: post
+    uri: http://queue.localhost.localstack.cloud:4566/<AWS_ACCOUNT_ID>/fifo_queue.fifo
+    body:
+      encoding: UTF-8
+      string: Action=SetQueueAttributes&Attribute.1.Name=VisibilityTimeout&Attribute.1.Value=60&Attribute.2.Name=MessageRetentionPeriod&Attribute.2.Value=1209600&QueueUrl=http%3A%2F%2Fqueue.localhost.localstack.cloud%3A4566%2F<AWS_ACCOUNT_ID>%2Ffifo_queue.fifo&Version=2012-11-05
+    headers:
+      Accept-Encoding:
+      - ''
+      User-Agent:
+      - aws-sdk-ruby3/3.169.0 ruby/2.7.5 x86_64-linux aws-sdk-sqs/1.34.0
+      Content-Type:
+      - application/x-www-form-urlencoded; charset=utf-8
+      Host:
+      - queue.localhost.localstack.cloud:4566
+      X-Amz-Date:
+      - 20230128T211315Z
+      X-Amz-Content-Sha256:
+      - f83627015ed55b237a3a9d3eab3a3d667bedd02e214645ae0892ebc488603204
+      Authorization:
+      - AWS4-HMAC-SHA256 Credential=<AWS_ACCESS_KEY_ID>/20230128/us-east-1/sqs/aws4_request,
+        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=3243e700470d2422d6f062b5d5fbd031d1d3453e2706884149714232c5df196a
+      Content-Length:
+      - '261'
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      Content-Type:
+      - text/xml
+      Content-Length:
+      - '259'
+      Connection:
+      - close
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Methods:
+      - HEAD,GET,PUT,POST,DELETE,OPTIONS,PATCH
+      Access-Control-Allow-Headers:
+      - authorization,cache-control,content-length,content-md5,content-type,etag,location,x-amz-acl,x-amz-content-sha256,x-amz-date,x-amz-request-id,x-amz-security-token,x-amz-tagging,x-amz-target,x-amz-user-agent,x-amz-version-id,x-amzn-requestid,x-localstack-target,amz-sdk-invocation-id,amz-sdk-request
+      Access-Control-Expose-Headers:
+      - etag,x-amz-version-id
+      Date:
+      - Sat, 28 Jan 2023 21:13:15 GMT
+      Server:
+      - hypercorn-h11
+    body:
+      encoding: UTF-8
+      string: |-
+        <?xml version='1.0' encoding='utf-8'?>
+        <SetQueueAttributesResponse xmlns="http://queue.amazonaws.com/doc/2012-11-05/"><ResponseMetadata><RequestId>NCP78LXDUHN1TYDXUPMEIK73G68GO9I92R7PZP0AT6TOW71TSE06</RequestId></ResponseMetadata></SetQueueAttributesResponse>
+  recorded_at: Sat, 28 Jan 2023 21:13:15 GMT
+recorded_with: VCR 6.0.0

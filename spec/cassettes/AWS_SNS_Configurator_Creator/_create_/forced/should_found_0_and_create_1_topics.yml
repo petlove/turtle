@@ -1,0 +1,52 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://sns.us-east-2.amazonaws.com/
+    body:
+      encoding: UTF-8
+      string: Action=CreateTopic&Name=prices_production_linquetaaaa_price_updater_warning&Version=2010-03-31
+    headers:
+      Content-Type:
+      - application/x-www-form-urlencoded; charset=utf-8
+      Accept-Encoding:
+      - ''
+      User-Agent:
+      - aws-sdk-ruby3/3.58.0 ruby/2.6.3 x86_64-linux aws-sdk-sns/1.18.0
+      Host:
+      - sns.us-east-2.amazonaws.com
+      X-Amz-Date:
+      - 20190708T202551Z
+      X-Amz-Content-Sha256:
+      - 28084195652b471fff50abb4b505e16b25230c5cc4a502de14aa17a2b0febde6
+      Content-Length:
+      - '94'
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      X-Amzn-Requestid:
+      - 046ca131-b193-50be-95f4-f4ac189c8509
+      Content-Type:
+      - text/xml
+      Content-Length:
+      - '358'
+      Date:
+      - Mon, 08 Jul 2019 20:25:51 GMT
+    body:
+      encoding: UTF-8
+      string: |
+        <CreateTopicResponse xmlns="http://sns.amazonaws.com/doc/2010-03-31/">
+          <CreateTopicResult>
+            <TopicArn>arn:aws:sns:us-east-2:000000000000:prices_production_linquetaaaa_price_updater_warning</TopicArn>
+          </CreateTopicResult>
+          <ResponseMetadata>
+            <RequestId>046ca131-b193-50be-95f4-f4ac189c8509</RequestId>
+          </ResponseMetadata>
+        </CreateTopicResponse>
+    http_version:
+  recorded_at: Mon, 08 Jul 2019 20:25:51 GMT
+recorded_with: VCR 5.0.0

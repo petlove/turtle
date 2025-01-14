@@ -1,0 +1,52 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: "<AWS_SQS_ENDPOINT>/"
+    body:
+      encoding: UTF-8
+      string: Action=Publish&Message=%7B%22name%22%3A%22linqueta%22%2C%22blog%22%3A%22linqueta.com%22%7D&TopicArn=arn%3Aaws%3Asns%3Aus-east-1%3A000000000000%3Aupdate_price&Version=2010-03-31
+    headers:
+      Content-Type:
+      - application/x-www-form-urlencoded; charset=utf-8
+      Accept-Encoding:
+      - ''
+      User-Agent:
+      - aws-sdk-ruby3/3.58.0 ruby/2.6.2 x86_64-linux aws-sdk-sns/1.18.0
+      Host:
+      - sns.us-east-1.amazonaws.com
+      X-Amz-Date:
+      - 20190704T222212Z
+      X-Amz-Content-Sha256:
+      - 944f02ff762005d908afe028abf9e4d59efd48c02e8aef3696f3ed025c159b80
+      Content-Length:
+      - '176'
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      X-Amzn-Requestid:
+      - 6ba50887-e39b-5a63-a97e-5d1f9dce0217
+      Content-Type:
+      - text/xml
+      Content-Length:
+      - '294'
+      Date:
+      - Thu, 04 Jul 2019 22:22:13 GMT
+    body:
+      encoding: UTF-8
+      string: |
+        <PublishResponse xmlns="http://sns.amazonaws.com/doc/2010-03-31/">
+          <PublishResult>
+            <MessageId>148ef73f-d886-5007-924e-a2a7a6d3c873</MessageId>
+          </PublishResult>
+          <ResponseMetadata>
+            <RequestId>6ba50887-e39b-5a63-a97e-5d1f9dce0217</RequestId>
+          </ResponseMetadata>
+        </PublishResponse>
+    http_version:
+  recorded_at: Thu, 04 Jul 2019 22:22:13 GMT
+recorded_with: VCR 5.0.0
