@@ -42,7 +42,7 @@ module Turtle
       end
 
       def build_event_notificator_notify!
-        send(:after_commit, ->(obj) { obj.event_notificator_notify! })
+        send(:after_commit, ->(obj) { obj.event_notificator_notify! }) # rubocop:disable Style/SymbolProc
       end
 
       def build_event_notificator_before_callback!
@@ -58,7 +58,7 @@ module Turtle
       end
 
       def build_event_notificator_after_touch_callback!
-        send(:after_touch, ->(obj) { obj.save })
+        send(:after_touch, ->(obj) { obj.save }) # rubocop:disable Style/SymbolProc
       end
 
       def build_event_notificator_options!(options)
