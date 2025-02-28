@@ -42,7 +42,9 @@ module Turtle
       end
 
       def build_event_notificator_notify!
-        send(:after_commit, lambda(&:event_notificator_notify!))
+        send(:after_commit, lambda { |obj|
+          obj.event_notificator_notify!
+        })
       end
 
       def build_event_notificator_before_callback!
@@ -58,7 +60,9 @@ module Turtle
       end
 
       def build_event_notificator_after_touch_callback!
-        send(:after_touch, lambda(&:save))
+        send(:after_touch, lambda { |obj|
+          obj.save
+        })
       end
 
       def build_event_notificator_options!(options)
