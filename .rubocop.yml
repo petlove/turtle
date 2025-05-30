@@ -1,6 +1,6 @@
 require: rubocop-performance
 
-Metrics/LineLength:
+Layout/LineLength:
   Max: 120
   Exclude:
     - 'spec/**/*'
