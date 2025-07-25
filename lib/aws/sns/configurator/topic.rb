@@ -48,7 +48,8 @@ module AWS
         end
 
         def publish!(message)
-          default_client.aws.publish(topic_arn: @arn, message: message.to_json)
+          payload = message.is_a?(Hash) ? message.to_json : message
+          default_client.aws.publish(topic_arn: @arn, message: payload)
         end
 
         private

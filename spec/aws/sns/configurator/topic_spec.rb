@@ -160,5 +160,15 @@ RSpec.describe AWS::SNS::Configurator::Topic, type: :model do
     it 'should publish in the topic', :vcr do
       is_expected.to be_truthy
     end
+
+    context 'with nested hash message' do
+      let(:topic) { build :topic }
+      let(:message) { { name: 'linqueta', blog: { url: 'linqueta.com' } } }
+      subject { topic.publish!(message) }
+  
+      it 'should publish in the topic with nested message', :vcr do
+        is_expected.to be_truthy
+      end
+    end
   end
 end
