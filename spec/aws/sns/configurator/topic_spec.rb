@@ -155,10 +155,36 @@ RSpec.describe AWS::SNS::Configurator::Topic, type: :model do
 
   describe '#publish!' do
     let(:topic) { build :topic }
+    let(:aws_client) { double('AwsClient') }
     subject { topic.publish!(name: 'linqueta', blog: 'linqueta.com') }
 
-    it 'should publish in the topic', :vcr do
-      is_expected.to be_truthy
+    before do
+      allow(topic).to receive_message_chain(:default_client, :aws).and_return(aws_client)
+      allow(aws_client).to receive(:publish)
+    end
+
+    context 'when payload is a hash' do
+      let(:message) { { nome: 'linqueta', blog: 'linqueta.com' } }
+  
+      it 'should publish in the topic with message as json' do
+        expect(aws_client).to receive(:publish).with(
+          topic_arn: topic.arn,
+          message: message.to_json
+        )
+        topic.publish!(message)
+      end
+    end
+
+    context 'when message is a json string' do
+      let(:json_message) { '{"nome":"linqueta", "blog":"linqueta.com"}' }
+  
+      it 'should publish in the topic with message as json' do
+        expect(aws_client).to receive(:publish).with(
+          topic_arn: topic.arn,
+          message: json_message
+        )
+        topic.publish!(json_message)
+      end
     end
   end
 end
