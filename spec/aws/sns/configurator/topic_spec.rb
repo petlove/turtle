@@ -156,7 +156,6 @@ RSpec.describe AWS::SNS::Configurator::Topic, type: :model do
   describe '#publish!' do
     let(:topic) { build :topic }
     let(:aws_client) { double('AwsClient') }
-    subject { topic.publish!(name: 'linqueta', blog: 'linqueta.com') }
 
     before do
       allow(topic).to receive_message_chain(:default_client, :aws).and_return(aws_client)
@@ -164,7 +163,7 @@ RSpec.describe AWS::SNS::Configurator::Topic, type: :model do
     end
 
     context 'when payload is a hash' do
-      let(:message) { { nome: 'linqueta', blog: 'linqueta.com' } }
+      let(:message) { { nome: 'petlove', site: 'petlove.com.br' } }
 
       it 'should publish in the topic with message as json' do
         expect(aws_client).to receive(:publish).with(
@@ -176,7 +175,7 @@ RSpec.describe AWS::SNS::Configurator::Topic, type: :model do
     end
 
     context 'when message is a json string' do
-      let(:json_message) { '{"nome":"linqueta", "blog":"linqueta.com"}' }
+      let(:json_message) { '{"nome":"petlove", "site":"petlove.com.br"}' }
 
       it 'should publish in the topic with message as json' do
         expect(aws_client).to receive(:publish).with(
@@ -184,6 +183,41 @@ RSpec.describe AWS::SNS::Configurator::Topic, type: :model do
           message: json_message
         )
         topic.publish!(json_message)
+      end
+    end
+  end
+
+  describe '#format_message' do
+    let(:topic) { build :topic }
+
+    context 'when message is a hash' do
+      let(:message) { { nome: 'petlove', site: 'petlove.com.br' } }
+
+      it 'returns a valid JSON string' do
+        result = topic.send(:format_message, message)
+
+        expect(result).to be_a(String)
+
+        parsed_message = JSON.parse(result)
+
+        expect(parsed_message['nome']).to eq('petlove')
+        expect(parsed_message['site']).to eq('petlove.com.br')
+      end
+    end
+
+    context 'when the message is already a JSON string' do
+      let(:json_message) { '{"nome":"petlove", "site":"petlove.com.br"}' }
+
+      it 'returns the original JSON string unchanged' do
+        result = topic.send(:format_message, json_message)
+
+        expect(result).to be_a(String)
+        expect(result).to eq(json_message)
+
+        parsed_message = JSON.parse(result)
+
+        expect(parsed_message['nome']).to eq('petlove')
+        expect(parsed_message['site']).to eq('petlove.com.br')
       end
     end
   end
