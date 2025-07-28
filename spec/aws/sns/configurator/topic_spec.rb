@@ -165,7 +165,7 @@ RSpec.describe AWS::SNS::Configurator::Topic, type: :model do
 
     context 'when payload is a hash' do
       let(:message) { { nome: 'linqueta', blog: 'linqueta.com' } }
-  
+
       it 'should publish in the topic with message as json' do
         expect(aws_client).to receive(:publish).with(
           topic_arn: topic.arn,
@@ -177,7 +177,7 @@ RSpec.describe AWS::SNS::Configurator::Topic, type: :model do
 
     context 'when message is a json string' do
       let(:json_message) { '{"nome":"linqueta", "blog":"linqueta.com"}' }
-  
+
       it 'should publish in the topic with message as json' do
         expect(aws_client).to receive(:publish).with(
           topic_arn: topic.arn,
