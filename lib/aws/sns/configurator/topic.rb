@@ -48,7 +48,7 @@ module AWS
         end
 
         def publish!(message)
-          default_client.aws.publish(topic_arn: @arn, message: message.to_json)
+          default_client.aws.publish(topic_arn: @arn, message: format_message(message))
         end
 
         private
@@ -90,6 +90,10 @@ module AWS
 
         def build_arn!
           @arn = ['arn:aws:sns', @region, account_id, @name_formatted].compact.join(':')
+        end
+
+        def format_message(message)
+          message.is_a?(Hash) ? message.to_json : message
         end
       end
     end
