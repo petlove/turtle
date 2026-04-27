@@ -6,12 +6,49 @@ RSpec.describe Turtle, type: :module do
   end
 
   describe '#shoryuken_queues_priorities' do
-    subject { described_class.shoryuken_queues_priorities({}) }
+    context 'call through' do
+      subject { described_class.shoryuken_queues_priorities({}) }
 
-    after { subject }
+      before { allow(described_class::Group).to receive(:to_h).and_return({}) }
+      after { subject }
 
-    it 'should call through Queue' do
-      expect(described_class::Queue).to receive(:shoryuken_priorities).once
+      it 'should call through Queue' do
+        expect(described_class::Queue).to receive(:shoryuken_priorities).once.and_return([])
+      end
+    end
+
+    context 'with grouped queues' do
+      subject { described_class.shoryuken_queues_priorities }
+
+      before { stub_const('AWS::SQS::Configurator::Reader::MAIN_FILE', './spec/fixtures/configs/with_shoryuken_groups.yml') }
+
+      it 'returns only queues not assigned to a group' do
+        is_expected.to eq([['app_name_production_regular_a', 5], ['app_name_production_regular_b', 3]])
+      end
+
+      it 'excludes grouped queues by name regardless of priority' do
+        allow(described_class::Queue).to receive(:shoryuken_priorities).and_return(
+          [['app_name_production_regular_a', 5], ['app_name_production_batch_solo', 99]]
+        )
+        is_expected.to eq([['app_name_production_regular_a', 5]])
+      end
+    end
+  end
+
+  describe '#shoryuken_groups' do
+    subject { described_class.shoryuken_groups }
+
+    before { stub_const('AWS::SQS::Configurator::Reader::MAIN_FILE', './spec/fixtures/configs/with_shoryuken_groups.yml') }
+
+    it 'returns groups as JSON string ready for shoryuken.yml' do
+      parsed = JSON.parse(subject)
+      expect(parsed['batch_solo']).to eq('concurrency' => 1, 'queues' => [['app_name_production_batch_solo', 1]])
+    end
+
+    it 'produces no overlap with shoryuken_queues_priorities' do
+      queue_names = described_class.shoryuken_queues_priorities.map(&:first)
+      group_queue_names = JSON.parse(subject).values.flat_map { |g| g['queues'].map(&:first) }
+      expect(queue_names & group_queue_names).to be_empty
     end
   end
 

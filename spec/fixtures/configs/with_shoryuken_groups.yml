@@ -1,0 +1,36 @@
+---
+default:
+  general:
+    region: 'us-east-1'
+    prefix: 'app_name'
+    environment: 'production'
+  queue:
+    dead_letter_queue: false
+queues:
+  - name: 'regular_a'
+    metadata:
+      priority: 5
+  - name: 'regular_b'
+    metadata:
+      priority: 3
+  - name: 'batch_solo'
+    metadata:
+      priority: 1
+  - name: 'batch_multi_a'
+    metadata:
+      priority: 2
+  - name: 'batch_multi_b'
+    metadata:
+      priority: 2
+groups:
+  batch_solo:
+    concurrency: 1
+    queues:
+      - batch_solo
+  batch_multi:
+    concurrency: 3
+    delay: 30
+    polling_strategy: 'WeightedRoundRobin' # Default, declaration optional
+    queues:
+      - batch_multi_a
+      - batch_multi_b

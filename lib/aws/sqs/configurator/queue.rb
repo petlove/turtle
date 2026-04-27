@@ -126,7 +126,7 @@ module AWS
 
         def dead_letter_options(options)
           options.merge(dead_letter_queue: false, topics: [], suffix: [@suffix, @dead_letter_queue_suffix]
-                 .compact.join('_'))
+                                                                      .compact.join('_'))
         end
 
         def build_attributes!

@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'turtle/version'
+require 'turtle/group'
 require 'turtle/queue'
 require 'turtle/topic'
 require 'turtle/logger'
@@ -14,7 +15,12 @@ require 'turtle/railtie' if defined?(Rails::Railtie) && defined?(Shoryuken)
 module Turtle
   class << self
     def shoryuken_queues_priorities(options = nil)
-      Queue.shoryuken_priorities(options)
+      queues_in_groups = Group.to_h.values.flat_map { |attrs| attrs[:queues].map { |name, _| name } }
+      Queue.shoryuken_priorities(options).reject { |name, _| queues_in_groups.include?(name) }
+    end
+
+    def shoryuken_groups
+      Group.to_json
     end
 
     def delayed_job_queue_attributes
