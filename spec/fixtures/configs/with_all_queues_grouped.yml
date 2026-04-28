@@ -1,0 +1,28 @@
+---
+default:
+  general:
+    region: 'us-east-1'
+    prefix: 'app_name'
+    environment: 'production'
+  queue:
+    dead_letter_queue: false
+queues:
+  - name: 'grouped_solo'
+    metadata:
+      priority: 1
+  - name: 'grouped_multi_a'
+    metadata:
+      priority: 2
+  - name: 'grouped_multi_b'
+    metadata:
+      priority: 2
+groups:
+  solo_group:
+    concurrency: 1
+    queues:
+      - grouped_solo
+  multi_group:
+    concurrency: 2
+    queues:
+      - grouped_multi_a
+      - grouped_multi_b

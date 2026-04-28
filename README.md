@@ -41,6 +41,37 @@ Turtle.shoryuken_queues_priorities(priority: 3)
 #  ["macaw_linquetab_perform_subscription_events", 3]]
 ```
 
+### Processing groups for shoryuken
+To use [Processing Groups](https://github.com/ruby-shoryuken/shoryuken/wiki/Processing-Groups), add `groups:` to your `aws-sqs-configurator` config:
+
+```yml
+queues:
+  - name: 'orders_queue'
+    metadata:
+      priority: 2
+  - name: 'payments_queue'
+    metadata:
+      priority: 1
+
+groups:
+  critical:
+    concurrency: 1
+    queues:
+      - orders_queue
+      - payments_queue
+```
+
+```ruby
+Turtle.shoryuken_groups
+# => "{\"critical\":{\"concurrency\":1,\"queues\":[[\"app_production_orders_queue\",2],[\"app_production_payments_queue\",1]]}}"
+```
+
+In `config/shoryuken.yml`:
+```yml
+queues: <%= Turtle.shoryuken_queues_priorities %>
+groups: <%= Turtle.shoryuken_groups %>
+```
+
 ### Name for
 ```ruby
 # Turtle.name_for(type, name, options)
