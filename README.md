@@ -12,6 +12,29 @@ Add this line to your application's Gemfile:
 gem 'turtle', github: 'petlove/turtle'
 ```
 
+## Logging
+
+By default, turtle uses `Rails.logger` when running inside a Rails app, or `Logger.new($stdout)` otherwise.
+
+To silence output in tests:
+```ruby
+# spec/spec_helper.rb
+RSpec.configure do |config|
+  config.before(:each) { Turtle.logger = Logger.new(IO::NULL) }
+  config.after(:each)  { Turtle.logger = nil }
+end
+```
+
+To use a custom logger:
+```ruby
+Turtle.logger = Logger.new('log/turtle.log')
+```
+
+To restore the default:
+```ruby
+Turtle.logger = nil
+```
+
 ## Usage
 
 ### Queues with priority for shoryuken

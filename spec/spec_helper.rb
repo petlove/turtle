@@ -24,7 +24,12 @@ RSpec.configure do |config|
   end
   FactoryBotConfig.configure(config)
 
+  config.before(:each) do
+    Turtle.logger = ::Logger.new(IO::NULL)
+  end
+
   config.after(:each) do
+    Turtle.logger = nil
     ENV['AWS_REGION'] = nil
   end
 end
