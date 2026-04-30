@@ -8,29 +8,21 @@ module AWS
 
         class << self
           def info(message)
-            puts log_info(message) if log?
+            return ::Turtle.logger.info(message) if ::Turtle.logger_set?
+
+            puts message if log?
           end
 
           def error(message)
-            puts log_error(message) if log?
-          end
+            return ::Turtle.logger.error(message) if ::Turtle.logger_set?
 
-          def log_info(message)
-            log('INFO', message)
-          end
-
-          def log_error(message)
-            log('ERROR', message)
+            puts message if log?
           end
 
           private
 
           def log?
             ENV[LOGGER_ENABLED_ENV] != 'false'
-          end
-
-          def log(severity_level, message)
-            "[#{Time.now.iso8601}] [AWS::SQS::Configurator] #{severity_level} -- : #{message}"
           end
         end
       end

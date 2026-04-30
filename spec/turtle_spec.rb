@@ -95,6 +95,30 @@ RSpec.describe Turtle, type: :module do
     end
   end
 
+  describe '.logger' do
+    it 'returns a Logger instance by default when Rails is absent' do
+      Turtle.logger = nil
+      expect(Turtle.logger).to be_a(::Logger)
+    end
+
+    it 'returns the assigned logger' do
+      custom = ::Logger.new(IO::NULL)
+      Turtle.logger = custom
+      expect(Turtle.logger).to eq(custom)
+    end
+
+    it 'is set? after assignment' do
+      Turtle.logger = ::Logger.new(IO::NULL)
+      expect(Turtle.logger_set?).to be true
+    end
+
+    it 'is not set? after reset to nil' do
+      Turtle.logger = ::Logger.new(IO::NULL)
+      Turtle.logger = nil
+      expect(Turtle.logger_set?).to be false
+    end
+  end
+
   describe '#name_for' do
     subject { described_class.name_for(type, 'linqueta', region: 'us-east-1', prefix: 'beagle', environment: 'dev') }
 
