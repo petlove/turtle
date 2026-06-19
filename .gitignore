@@ -13,3 +13,5 @@
 !.env.test
 tags
 Gemfile.lock
+.gems/*
+!.gems/.keep

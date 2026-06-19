@@ -18,7 +18,7 @@ module Turtle
       def enqueue!(worker, data, options)
         initial = Time.now
         publish!(worker, envelope(data, options), options).tap do
-          Logger.info(enqueued_log_message(worker, options, Time.now - initial))
+          Logger.debug(enqueued_log_message(worker, options, Time.now - initial))
         end
       end
 

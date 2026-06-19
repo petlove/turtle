@@ -14,7 +14,7 @@ module Turtle
       def publish!(topic, data, options)
         initial = Time.now
         notify!(topic, envelope(data, options), options).tap do
-          Logger.info(enqueued_log_message(topic, options, Time.now - initial))
+          Logger.debug(enqueued_log_message(topic, options, Time.now - initial))
         end
       end
 

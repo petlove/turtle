@@ -19,7 +19,7 @@ module AWS
         private
 
         def log
-          Logger.info("Message published: #{@endpoint} -> #{@topic.name_formatted} - #{@topic.region}")
+          Logger.debug("Message published: #{@endpoint} -> #{@topic.name_formatted} - #{@topic.region}")
         end
 
         def build_topic(topic)

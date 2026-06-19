@@ -14,7 +14,7 @@ module Turtle
       end
 
       def publish!(payload, options)
-        Logger.info("[Event Notification] Model: #{options[:model]} Event: #{@event}")
+        Logger.debug("[Event Notification] Model: #{options[:model]} Event: #{@event}")
         Turtle.publish!(topic_options(options), payload, publish_options(options))
       end
 

@@ -5,15 +5,17 @@ on: [push]
 jobs:
   test:
     runs-on: ubuntu-latest
+    container:
+      image: ruby:2.7
 
     steps:
       - name: Checkout project
-        uses: actions/checkout@v2
-      - name: Set up ruby
-        uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: 2.7
-          bundler-cache: true
+        uses: actions/checkout@0717577d45739eb3c851188b29f50ed6c0b2194e # v2.8.0
+      - name: Set up bundler
+        run: |
+          gem install bundler -v 2.4.22
+          bundle config set --local path 'vendor/bundle'
+          bundle install --jobs 4 --retry 3
       - name: Run tests
         env:
           RAILS_ENV: test

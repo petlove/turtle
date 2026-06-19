@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 RSpec.describe Turtle::Logger, type: :module do
+  after { described_class.reset! }
+
   describe '#log_info' do
     subject { described_class.log_info('The topic was created successfully') }
 
@@ -33,18 +35,33 @@ RSpec.describe Turtle::Logger, type: :module do
     end
   end
 
+  describe '#logger' do
+    subject { described_class.logger }
+
+    it 'should be a stdlib Logger' do
+      is_expected.to be_a(::Logger)
+    end
+  end
+
+  describe '#debug' do
+    subject { described_class.debug('A debug message') }
+
+    after { subject }
+
+    it 'should delegate to the underlying logger' do
+      expect(described_class.logger).to receive(:debug)
+        .with('A debug message').once
+    end
+  end
+
   describe '#info' do
     subject { described_class.info('The topic was created successfully') }
 
     after { subject }
 
-    it 'should call log_info' do
-      expect(described_class).to receive(:log_info)
+    it 'should delegate to the underlying logger' do
+      expect(described_class.logger).to receive(:info)
         .with('The topic was created successfully').once
-    end
-
-    it 'should print with puts' do
-      expect(described_class).to receive(:puts).once
     end
   end
 
@@ -53,13 +70,9 @@ RSpec.describe Turtle::Logger, type: :module do
 
     after { subject }
 
-    it 'should call log_info' do
-      expect(described_class).to receive(:log_error)
+    it 'should delegate to the underlying logger' do
+      expect(described_class.logger).to receive(:error)
         .with('The topic had an error').once
-    end
-
-    it 'should print with puts' do
-      expect(described_class).to receive(:puts).once
     end
   end
 end
