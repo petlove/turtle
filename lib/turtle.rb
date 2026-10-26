@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require 'logger'
 require 'turtle/version'
 require 'turtle/group'
 require 'turtle/queue'
@@ -14,6 +15,16 @@ require 'turtle/railtie' if defined?(Rails::Railtie) && defined?(Shoryuken)
 
 module Turtle
   class << self
+    attr_writer :logger
+
+    def logger
+      @logger || build_default_logger
+    end
+
+    def logger_set?
+      !@logger.nil?
+    end
+
     def shoryuken_queues_priorities(options = nil)
       queues_in_groups = Group.to_h.values.flat_map { |attrs| attrs[:queues].map { |name, _| name } }
       Queue.shoryuken_priorities(options).reject { |name, _| queues_in_groups.include?(name) }
@@ -47,6 +58,12 @@ module Turtle
     end
 
     private
+
+    def build_default_logger
+      return ::Rails.logger if defined?(::Rails) && ::Rails.logger
+
+      ::Logger.new($stdout)
+    end
 
     def name_for_model(type, options)
       case type
