@@ -37,7 +37,7 @@ module Turtle
       end
 
       def initialize_event_notificator
-        send(:include, Turtle::EventNotificator::InstanceMethods)
+        send(:include, Turtle::EventNotificator::InstanceMethods) # rubocop:disable Lint/SendWithMixinArgument
         connection
       end
 
