@@ -5,109 +5,109 @@ http_interactions:
     uri: "<AWS_SQS_ENDPOINT>/"
     body:
       encoding: UTF-8
-      string: Action=CreateQueue&Attribute.1.Name=FifoQueue&Attribute.1.Value=true&Attribute.2.Name=ContentBasedDeduplication&Attribute.2.Value=false&QueueName=fifo_queue.fifo&Version=2012-11-05
+      string: '{"QueueName":"fifo_queue.fifo","Attributes":{"FifoQueue":"true","ContentBasedDeduplication":"false"}}'
     headers:
       Accept-Encoding:
       - ''
-      User-Agent:
-      - aws-sdk-ruby3/3.169.0 ruby/2.7.5 x86_64-linux aws-sdk-sqs/1.34.0
+      Amz-Sdk-Invocation-Id:
+      - 4aab8f11-9d1e-4416-8ad3-8b5be669fa2e
       Content-Type:
-      - application/x-www-form-urlencoded; charset=utf-8
+      - application/x-amz-json-1.0
+      X-Amz-Target:
+      - AmazonSQS.CreateQueue
+      X-Amzn-Query-Mode:
+      - 'true'
       Host:
       - localstack:4566
       X-Amz-Date:
-      - 20230128T211315Z
+      - 20261024T001733Z
       X-Amz-Content-Sha256:
-      - c12083e76bbcfff29a6e36418a4ea997e6210eb8858da67b24f64209088e9fcc
+      - b9027758b0187a1f547c27b3047d147dd55e3c84815ae00464413e3733ed4ea6
       Authorization:
-      - AWS4-HMAC-SHA256 Credential=<AWS_ACCESS_KEY_ID>/20230128/us-east-1/sqs/aws4_request,
-        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=98912481b57c0ce05ac55959b8a8e73bd44170955dbbf0d962833655f041d7ec
+      - AWS4-HMAC-SHA256 Credential=<AWS_ACCESS_KEY_ID>/20261024/us-east-1/sqs/aws4_request,
+        SignedHeaders=amz-sdk-invocation-id;content-type;host;x-amz-content-sha256;x-amz-date;x-amz-target;x-amzn-query-mode,
+        Signature=6e63619c1a3ad77ce6b99d7356a0c5e12b3a0f57bd2bcc99929d750fae0708f1
+      User-Agent:
+      - aws-sdk-ruby3/3.260.0 ua/2.1 api/sqs#1.122.0 os/linux md/x86_64 lang/ruby#2.7.8
+        md/2.7.8 m/N,T,Z,b,D,g
       Content-Length:
-      - '180'
+      - '101'
       Accept:
       - "*/*"
   response:
     status:
       code: 200
-      message: ''
+      message: OK
     headers:
       Content-Type:
-      - text/xml
+      - application/x-amz-json-1.0;charset=UTF-8
       Content-Length:
-      - '378'
-      Connection:
-      - close
-      Access-Control-Allow-Origin:
-      - "*"
-      Access-Control-Allow-Methods:
-      - HEAD,GET,PUT,POST,DELETE,OPTIONS,PATCH
-      Access-Control-Allow-Headers:
-      - authorization,cache-control,content-length,content-md5,content-type,etag,location,x-amz-acl,x-amz-content-sha256,x-amz-date,x-amz-request-id,x-amz-security-token,x-amz-tagging,x-amz-target,x-amz-user-agent,x-amz-version-id,x-amzn-requestid,x-localstack-target,amz-sdk-invocation-id,amz-sdk-request
-      Access-Control-Expose-Headers:
-      - etag,x-amz-version-id
+      - '66'
       Date:
-      - Sat, 28 Jan 2023 21:13:15 GMT
-      Server:
-      - hypercorn-h11
+      - Sat, 24 Oct 2026 00:17:33 GMT
+      X-Amz-Id-2:
+      - 728d6e4f-a1ff-4bc1-8611-c7f3c10c94a0
+      X-Amz-Request-Id:
+      - 728d6e4f-a1ff-4bc1-8611-c7f3c10c94a0
+      X-Amzn-Requestid:
+      - 728d6e4f-a1ff-4bc1-8611-c7f3c10c94a0
     body:
       encoding: UTF-8
-      string: |-
-        <?xml version='1.0' encoding='utf-8'?>
-        <CreateQueueResponse xmlns="http://queue.amazonaws.com/doc/2012-11-05/"><CreateQueueResult><QueueUrl>http://queue.localhost.localstack.cloud:4566/<AWS_ACCOUNT_ID>/fifo_queue.fifo</QueueUrl></CreateQueueResult><ResponseMetadata><RequestId>DHJFDIJ24PV1A9HBIPFX0NGCZZPMFWQTHDKMHUYR1O9Z8RM8ED0Z</RequestId></ResponseMetadata></CreateQueueResponse>
-  recorded_at: Sat, 28 Jan 2023 21:13:15 GMT
+      string: '{"QueueUrl":"<AWS_SQS_ENDPOINT>/<AWS_ACCOUNT_ID>/fifo_queue.fifo"}'
+  recorded_at: Sat, 24 Oct 2026 00:17:33 GMT
 - request:
     method: post
-    uri: http://queue.localhost.localstack.cloud:4566/<AWS_ACCOUNT_ID>/fifo_queue.fifo
+    uri: "<AWS_SQS_ENDPOINT>/<AWS_ACCOUNT_ID>/fifo_queue.fifo"
     body:
       encoding: UTF-8
-      string: Action=SetQueueAttributes&Attribute.1.Name=VisibilityTimeout&Attribute.1.Value=60&Attribute.2.Name=MessageRetentionPeriod&Attribute.2.Value=1209600&QueueUrl=http%3A%2F%2Fqueue.localhost.localstack.cloud%3A4566%2F<AWS_ACCOUNT_ID>%2Ffifo_queue.fifo&Version=2012-11-05
+      string: '{"QueueUrl":"<AWS_SQS_ENDPOINT>/<AWS_ACCOUNT_ID>/fifo_queue.fifo","Attributes":{"VisibilityTimeout":"60","MessageRetentionPeriod":"1209600"}}'
     headers:
       Accept-Encoding:
       - ''
-      User-Agent:
-      - aws-sdk-ruby3/3.169.0 ruby/2.7.5 x86_64-linux aws-sdk-sqs/1.34.0
+      Amz-Sdk-Invocation-Id:
+      - 276e3250-e6c1-45dc-91a9-5e7e2df49120
       Content-Type:
-      - application/x-www-form-urlencoded; charset=utf-8
+      - application/x-amz-json-1.0
+      X-Amz-Target:
+      - AmazonSQS.SetQueueAttributes
+      X-Amzn-Query-Mode:
+      - 'true'
       Host:
-      - queue.localhost.localstack.cloud:4566
+      - localstack:4566
       X-Amz-Date:
-      - 20230128T211315Z
+      - 20261024T001733Z
       X-Amz-Content-Sha256:
-      - f83627015ed55b237a3a9d3eab3a3d667bedd02e214645ae0892ebc488603204
+      - 950bf88860d0fa1b4c70704b37ee8903d616aa13fc8a2f764e4a699164b23014
       Authorization:
-      - AWS4-HMAC-SHA256 Credential=<AWS_ACCESS_KEY_ID>/20230128/us-east-1/sqs/aws4_request,
-        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date, Signature=3243e700470d2422d6f062b5d5fbd031d1d3453e2706884149714232c5df196a
+      - AWS4-HMAC-SHA256 Credential=<AWS_ACCESS_KEY_ID>/20261024/us-east-1/sqs/aws4_request,
+        SignedHeaders=amz-sdk-invocation-id;content-type;host;x-amz-content-sha256;x-amz-date;x-amz-target;x-amzn-query-mode,
+        Signature=6a64af3e724bc4604bb1525ef9f8dabe3ba8a589765f4be01945eae6d839cc19
+      User-Agent:
+      - aws-sdk-ruby3/3.260.0 ua/2.1 api/sqs#1.122.0 os/linux md/x86_64 lang/ruby#2.7.8
+        md/2.7.8 m/N,T,Z,b,D,g
       Content-Length:
-      - '261'
+      - '141'
       Accept:
       - "*/*"
   response:
     status:
       code: 200
-      message: ''
+      message: OK
     headers:
       Content-Type:
-      - text/xml
+      - application/x-amz-json-1.0;charset=UTF-8
       Content-Length:
-      - '259'
-      Connection:
-      - close
-      Access-Control-Allow-Origin:
-      - "*"
-      Access-Control-Allow-Methods:
-      - HEAD,GET,PUT,POST,DELETE,OPTIONS,PATCH
-      Access-Control-Allow-Headers:
-      - authorization,cache-control,content-length,content-md5,content-type,etag,location,x-amz-acl,x-amz-content-sha256,x-amz-date,x-amz-request-id,x-amz-security-token,x-amz-tagging,x-amz-target,x-amz-user-agent,x-amz-version-id,x-amzn-requestid,x-localstack-target,amz-sdk-invocation-id,amz-sdk-request
-      Access-Control-Expose-Headers:
-      - etag,x-amz-version-id
+      - '2'
       Date:
-      - Sat, 28 Jan 2023 21:13:15 GMT
-      Server:
-      - hypercorn-h11
+      - Sat, 24 Oct 2026 00:17:33 GMT
+      X-Amz-Id-2:
+      - 8a4741ca-f11d-4149-94d9-e849e726cd46
+      X-Amz-Request-Id:
+      - 8a4741ca-f11d-4149-94d9-e849e726cd46
+      X-Amzn-Requestid:
+      - 8a4741ca-f11d-4149-94d9-e849e726cd46
     body:
       encoding: UTF-8
-      string: |-
-        <?xml version='1.0' encoding='utf-8'?>
-        <SetQueueAttributesResponse xmlns="http://queue.amazonaws.com/doc/2012-11-05/"><ResponseMetadata><RequestId>NCP78LXDUHN1TYDXUPMEIK73G68GO9I92R7PZP0AT6TOW71TSE06</RequestId></ResponseMetadata></SetQueueAttributesResponse>
-  recorded_at: Sat, 28 Jan 2023 21:13:15 GMT
-recorded_with: VCR 6.0.0
+      string: "{}"
+  recorded_at: Sat, 24 Oct 2026 00:17:33 GMT
+recorded_with: VCR 6.4.0
